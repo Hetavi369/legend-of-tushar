@@ -1,0 +1,3592 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Legend of Tushar â€” A cinematic, Western-inspired birthday journey celebrating an extraordinary man.">
+  <meta name="theme-color" content="#0a0a0c">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="The Legend of Tushar">
+  <meta property="og:description" content="Every legend has a beginning. This one is his. A cinematic birthday story.">
+  <meta property="og:type" content="website">
+
+  <title>THE LEGEND OF TUSHAR | A Cinematic Birthday Journey</title>
+
+  <!-- Google Fonts: Rye (Western Display), Cinzel & Cinzel Decorative (Grand Serif), Lora (Reading Serif), Montserrat (Clean Subtitles) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700;900&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@400;600;700;800&family=Rye&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <style>
+/* ===================================================================
+   THE LEGEND OF TUSHAR â€” STYLESHEET
+   A Cinematic, Western-Inspired Experience (RDR2 Atmospheric Aesthetic)
+   =================================================================== */
+
+/* -------------------------------------------------------------------
+   1. CSS VARIABLES & DESIGN TOKENS
+   ------------------------------------------------------------------- */
+:root {
+  /* Cinematic Color Palette */
+  --bg-deep-void: #050406;
+  --bg-obsidian: #0a080c;
+  --bg-charcoal: #120e14;
+  --bg-card: rgba(18, 14, 20, 0.92);
+  --bg-card-hover: rgba(26, 20, 30, 0.96);
+
+  /* Crimson & Blood-Red Accents */
+  --red-deep: #4a090e;
+  --red-crimson: #8b1e1e;
+  --red-blood: #b31b1b;
+  --red-ember: #c41e3a;
+  --red-glow: rgba(196, 30, 58, 0.4);
+
+  /* Aged Gold & Warm Amber */
+  --gold-aged: #c5a059;
+  --gold-bright: #e8c878;
+  --gold-pale: #f5e4be;
+  --gold-dim: #7f6636;
+  --amber-warm: #e28743;
+  --amber-fire: #ff9e42;
+  --amber-glow: rgba(226, 135, 67, 0.35);
+
+  /* Dusty Parchment & Desert Sand */
+  --parchment-light: #ece3d4;
+  --parchment-base: #d8c8b4;
+  --parchment-dim: #a89a88;
+  --dust-dark: #3a3229;
+
+  /* Western Borders */
+  --border-gold: rgba(197, 160, 89, 0.35);
+  --border-gold-strong: rgba(197, 160, 89, 0.7);
+  --border-crimson: rgba(139, 30, 30, 0.5);
+
+  /* Typography */
+  --font-western: 'Rye', 'Cinzel Decorative', 'Georgia', serif;
+  --font-heading: 'Cinzel', 'Georgia', serif;
+  --font-body: 'Lora', 'Georgia', serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Transitions */
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spacing */
+  --container-max: 1200px;
+  --hud-height: 64px;
+}
+
+/* -------------------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   ------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: var(--bg-deep-void);
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--parchment-base);
+  background-color: var(--bg-deep-void);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Accessible focus outlines */
+:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------------------
+   3. ATMOSPHERIC OVERLAYS & PARTICLES CANVAS
+   ------------------------------------------------------------------- */
+/* Canvas for floating dust and embers */
+.particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Vignette Shadow Overlay */
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(5, 4, 6, 0.45) 75%,
+    rgba(5, 4, 6, 0.88) 100%
+  );
+}
+
+/* Vintage Film Grain Overlay */
+.film-grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* -------------------------------------------------------------------
+   4. TOP PERSISTENT HUD NAVIGATION
+   ------------------------------------------------------------------- */
+.hud-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--hud-height);
+  z-index: 50;
+  background: linear-gradient(180deg, rgba(8, 6, 10, 0.95) 0%, rgba(8, 6, 10, 0.82) 80%, transparent 100%);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-gold);
+  transition: transform var(--transition-normal), background var(--transition-normal);
+}
+
+.hud-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--gold-pale);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hud-star {
+  color: var(--red-ember);
+  font-size: 0.8rem;
+}
+
+.hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hud-link {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color var(--transition-fast);
+}
+
+.hud-link:hover,
+.hud-link.active {
+  color: var(--gold-bright);
+}
+
+.hud-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-aged), transparent);
+}
+
+/* Music Toggle Button */
+.hud-audio-controls {
+  display: flex;
+  align-items: center;
+}
+
+.hud-btn.music-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.9rem;
+  background: rgba(22, 17, 24, 0.85);
+  border: 1px solid var(--border-gold);
+  border-radius: 3px;
+  color: var(--parchment-base);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.hud-btn.music-btn:hover {
+  background: rgba(35, 25, 40, 0.95);
+  border-color: var(--gold-bright);
+  color: var(--gold-pale);
+  box-shadow: 0 0 12px var(--amber-glow);
+}
+
+.audio-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mute-slash {
+  transition: opacity var(--transition-fast);
+  opacity: 1;
+}
+
+.music-btn.playing .mute-slash {
+  opacity: 0;
+}
+
+.music-btn.playing .sound-wave {
+  animation: soundPulse 1.2s ease-in-out infinite alternate;
+}
+
+.music-btn.playing .wave-2 {
+  animation-delay: 0.4s;
+}
+
+@keyframes soundPulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.audio-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red-crimson);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.music-btn.playing .audio-indicator-dot {
+  background: #4caf50;
+  box-shadow: 0 0 8px #4caf50;
+}
+
+/* -------------------------------------------------------------------
+   5. SCENE ONE â€” CINEMATIC OPENING (HERO)
+   ------------------------------------------------------------------- */
+.scene-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: calc(var(--hud-height) + 2rem) 1.5rem 3rem;
+  text-align: center;
+}
+
+/* Landscape Vector Backdrop */
+.landscape-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.western-landscape-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 65% 80%;
+  animation: kenBurnsLandscape 26s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurnsLandscape {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate(-1.5%, -1%);
+  }
+}
+
+/* Ground Fog & Mist Layer */
+.mist-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 6, 10, 0.95) 0%,
+    rgba(20, 10, 15, 0.6) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hero Content Box */
+.hero-content {
+  position: relative;
+  z-index: 5;
+  max-width: 880px;
+  margin: 0 auto;
+  animation: heroReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hero Kicker */
+.hero-kicker-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.kicker-ornament {
+  color: var(--gold-aged);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.hero-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  color: var(--parchment-base);
+  text-transform: uppercase;
+}
+
+/* Hero Title: THE LEGEND OF TUSHAR */
+.hero-title {
+  font-family: var(--font-western);
+  font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0.08em;
+  color: var(--parchment-light);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.45em;
+  text-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.9),
+    0 0 35px var(--red-glow);
+}
+
+.hero-title .title-sub {
+  font-family: var(--font-heading);
+  font-size: 0.55em;
+  letter-spacing: 0.22em;
+  color: var(--gold-bright);
+}
+
+.hero-title .title-name {
+  color: #ffeed0;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(226, 135, 67, 0.6),
+    0 0 45px var(--red-ember);
+}
+
+/* Ornamental Western Divider */
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 440px;
+  margin: 0 auto 1.5rem;
+}
+
+.star-accent {
+  color: var(--gold-aged);
+  font-size: 0.9rem;
+}
+
+.star-accent.center-star {
+  color: var(--red-ember);
+  font-size: 1.25rem;
+}
+
+.line-accent {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-aged), transparent);
+}
+
+/* Exact Opening Subtitle */
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  font-style: italic;
+  color: var(--parchment-base);
+  margin-bottom: 2.2rem;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* Hero Action Buttons */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+/* Primary Western Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.btn-western-primary {
+  padding: 1.15rem 2.5rem;
+  font-size: 0.95rem;
+  color: #0b0709;
+  background: linear-gradient(135deg, #f5d48b 0%, #d4a754 50%, #997328 100%);
+  border: 1px solid var(--gold-bright);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.7),
+    0 0 25px var(--amber-glow);
+}
+
+.btn-western-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #fff0c2 0%, #e8bc68 50%, #b88b32 100%);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(232, 200, 120, 0.65);
+}
+
+.btn-western-primary:active {
+  transform: translateY(1px);
+}
+
+/* Western Corner Notches */
+.btn-border-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: #000;
+  border-style: solid;
+}
+
+.btn-border-corner.top-left {
+  top: 3px;
+  left: 3px;
+  border-width: 2px 0 0 2px;
+}
+
+.btn-border-corner.top-right {
+  top: 3px;
+  right: 3px;
+  border-width: 2px 2px 0 0;
+}
+
+.btn-border-corner.bottom-left {
+  bottom: 3px;
+  left: 3px;
+  border-width: 0 0 2px 2px;
+}
+
+.btn-border-corner.bottom-right {
+  bottom: 3px;
+  right: 3px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Skip Intro Link */
+.skip-intro-btn {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px dashed rgba(197, 160, 89, 0.4);
+  transition: all var(--transition-fast);
+}
+
+.skip-intro-btn:hover {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold-bright);
+}
+
+/* Audio Tip */
+.hero-tip {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--parchment-dim);
+  letter-spacing: 0.05em;
+}
+
+.hero-tip em {
+  color: var(--gold-pale);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.tip-icon {
+  color: var(--red-ember);
+  margin-right: 0.35rem;
+}
+
+/* Scroll Mouse Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 5;
+  opacity: 0.75;
+}
+
+.scroll-mouse {
+  width: 20px;
+  height: 32px;
+  border: 2px solid var(--gold-aged);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 6px;
+  background: var(--gold-bright);
+  border-radius: 2px;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: mouseWheel 1.8s ease-in-out infinite;
+}
+
+@keyframes mouseWheel {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+.scroll-text {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--parchment-dim);
+}
+
+/* -------------------------------------------------------------------
+   6. SCENE TWO â€” THE LIVING TIMELINE
+   ------------------------------------------------------------------- */
+.scene-timeline {
+  position: relative;
+  padding: 6rem 1.5rem 8rem;
+  background: 
+    radial-gradient(ellipse at 50% 10%, rgba(139, 30, 30, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-deep-void) 0%, #0d0a0f 50%, var(--bg-deep-void) 100%);
+  z-index: 5;
+}
+
+.timeline-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Section Header Shared */
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 5rem;
+}
+
+.kicker-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(139, 30, 30, 0.3);
+  border: 1px solid var(--border-crimson);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--parchment-light);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.header-flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 320px;
+  margin: 0 auto 1.2rem;
+}
+
+.flourish-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-aged), transparent);
+}
+
+.flourish-diamond {
+  color: var(--red-ember);
+  font-size: 0.8rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--parchment-dim);
+  line-height: 1.7;
+}
+
+/* Timeline Trail & Spine */
+.timeline-trail {
+  position: relative;
+  padding: 2rem 0;
+}
+
+/* Central Glowing Line */
+.timeline-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgba(197, 160, 89, 0.1) 0%,
+    var(--gold-aged) 15%,
+    var(--red-ember) 50%,
+    var(--gold-aged) 85%,
+    rgba(197, 160, 89, 0.1) 100%
+  );
+  box-shadow: 0 0 12px var(--amber-glow);
+  z-index: 1;
+}
+
+/* Timeline Card Container */
+.timeline-card {
+  position: relative;
+  margin-bottom: 6rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.timeline-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline Node Marker */
+.timeline-marker {
+  position: absolute;
+  top: 3.5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.marker-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-charcoal);
+  border: 2px solid var(--gold-aged);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 0 15px rgba(0, 0, 0, 0.9),
+    0 0 15px var(--amber-glow);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.marker-circle.gold-circle {
+  border-color: var(--gold-bright);
+  background: #1e150f;
+  box-shadow: 0 0 20px rgba(232, 200, 120, 0.5);
+}
+
+.timeline-card:hover .marker-circle {
+  transform: scale(1.12);
+  border-color: var(--red-ember);
+}
+
+.marker-number {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gold-bright);
+}
+
+/* Chapter Grid: 2 Columns on Desktop */
+.chapter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+/* Reverse layout: swaps text and media */
+.reverse-layout .chapter-grid {
+  direction: rtl;
+}
+
+.reverse-layout .chapter-body,
+.reverse-layout .chapter-media {
+  direction: ltr;
+}
+
+/* Photo Slot Styling: Archival Western Frame */
+.photo-frame {
+  position: relative;
+  background: var(--bg-charcoal);
+  padding: 12px;
+  border: 1px solid var(--border-gold);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.photo-frame:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.95),
+    0 0 30px var(--amber-glow);
+  border-color: var(--gold-bright);
+}
+
+.photo-frame.ornate-frame {
+  border: 2px solid var(--gold-bright);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(226, 135, 67, 0.4);
+}
+
+/* Western Frame Brass Corner Ornaments */
+.frame-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--gold-aged);
+  border-style: solid;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.corner-tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+.corner-tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+.corner-bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
+.corner-br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+/* Chapter Image */
+.chapter-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 480px;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  filter: sepia(0.2) contrast(1.05) brightness(0.95);
+  transition: filter var(--transition-slow), transform var(--transition-slow);
+}
+
+.photo-frame:hover .chapter-photo {
+  filter: sepia(0.05) contrast(1.08) brightness(1);
+  transform: scale(1.02);
+}
+
+/* Archival Brass Label Plate */
+.photo-plate {
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #1f1812 0%, #120e0a 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--gold-pale);
+}
+
+.photo-plate.gold-plate {
+  border-color: var(--gold-bright);
+  background: linear-gradient(180deg, #2b1f14 0%, #191008 100%);
+}
+
+.plate-chapter {
+  color: var(--red-ember);
+  font-weight: 700;
+}
+
+/* Chapter Narrative Content Box */
+.chapter-body {
+  background: var(--bg-card);
+  padding: 2.5rem;
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.chapter-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.badge-age {
+  padding: 0.25rem 0.75rem;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-bright);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.badge-age.gold-badge {
+  background: rgba(232, 200, 120, 0.25);
+  border-color: var(--gold-bright);
+  color: #fff0c2;
+}
+
+.badge-status {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red-ember);
+  text-transform: uppercase;
+}
+
+.badge-status.gold-status {
+  color: var(--gold-bright);
+}
+
+.chapter-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--parchment-light);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-crimson);
+  padding-bottom: 0.75rem;
+}
+
+.chapter-heading.gold-heading {
+  color: var(--gold-pale);
+  border-bottom-color: var(--gold-bright);
+}
+
+.chapter-text-block {
+  margin-bottom: 1.5rem;
+}
+
+.narrative-quote {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold-pale);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.narrative-paragraph {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--parchment-base);
+  margin-bottom: 0.9rem;
+  line-height: 1.8;
+}
+
+.narrative-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Signature Stamp */
+.chapter-signature-stamp {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(197, 160, 89, 0.25);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+}
+
+.stamp-icon {
+  color: var(--red-ember);
+  font-size: 0.8rem;
+}
+
+.gold-stamp .stamp-icon {
+  color: var(--gold-bright);
+}
+
+/* -------------------------------------------------------------------
+   7. SCENE THREE â€” THE CAMPFIRE INTERLUDE
+   ------------------------------------------------------------------- */
+.scene-campfire {
+  position: relative;
+  padding: 8rem 1.5rem 10rem;
+  background: 
+    radial-gradient(ellipse at 50% 25%, rgba(226, 135, 67, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-deep-void) 0%, #0c080e 40%, #060408 100%);
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Night Sky Backdrop with Twinkling Stars */
+.night-forest-sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.night-stars {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 25px 35px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 140px 80px, #ffd782, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 280px 150px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 450px 60px, #ffbe0b, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 600px 190px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 780px 110px, #ffd782, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 950px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 1120px 140px, #ffb703, rgba(0,0,0,0));
+  background-size: 1200px 300px;
+  opacity: 0.65;
+  animation: starTwinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle {
+  0% { opacity: 0.45; }
+  100% { opacity: 0.85; }
+}
+
+.forest-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(180deg, transparent 0%, rgba(5, 3, 6, 0.95) 85%);
+}
+
+.campfire-stage {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===================================================================
+   CAMPFIRE VISUAL EFFECT (PURE CSS FLAMES, LOGS & GLOW)
+   =================================================================== */
+.campfire-visual-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+/* Campfire Core */
+.campfire-core {
+  position: relative;
+  width: 220px;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Ambient Radial Fire Glow */
+.ambient-fire-glow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  height: 260px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 140, 26, 0.38) 0%,
+    rgba(226, 75, 20, 0.22) 40%,
+    rgba(139, 20, 20, 0.1) 70%,
+    transparent 100%
+  );
+  filter: blur(25px);
+  pointer-events: none;
+  animation: fireGlowPulse 2.4s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes fireGlowPulse {
+  0% { transform: translateX(-50%) scale(0.95); opacity: 0.75; }
+  100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+}
+
+/* Flame Assembly */
+.flame-assembly {
+  position: relative;
+  width: 120px;
+  height: 140px;
+  margin-bottom: 25px;
+  z-index: 3;
+}
+
+.flame-tongue {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  transform-origin: bottom center;
+  filter: blur(1.5px);
+}
+
+/* Outer Crimson Flame */
+.flame-1 {
+  width: 90px;
+  height: 120px;
+  margin-left: -45px;
+  background: radial-gradient(circle at 50% 80%, #ff4500 0%, #b31b1b 60%, rgba(139, 10, 10, 0) 100%);
+  animation: flameFlicker 1.8s ease-in-out infinite alternate;
+}
+
+.flame-2 {
+  width: 75px;
+  height: 110px;
+  margin-left: -35px;
+  background: radial-gradient(circle at 50% 80%, #ff5722 0%, #d84315 65%, transparent 100%);
+  animation: flameFlicker 2.1s ease-in-out infinite 0.3s alternate-reverse;
+}
+
+/* Mid Amber Flame */
+.flame-3 {
+  width: 60px;
+  height: 95px;
+  margin-left: -30px;
+  background: radial-gradient(circle at 50% 80%, #ff9800 0%, #e65100 70%, transparent 100%);
+  animation: flameFlicker 1.5s ease-in-out infinite 0.1s alternate;
+}
+
+.flame-4 {
+  width: 48px;
+  height: 85px;
+  margin-left: -24px;
+  background: radial-gradient(circle at 50% 85%, #ffb74d 0%, #ff6f00 70%, transparent 100%);
+  animation: flameFlicker 1.9s ease-in-out infinite 0.5s alternate-reverse;
+}
+
+/* Inner Golden-White Core */
+.flame-5 {
+  width: 32px;
+  height: 60px;
+  margin-left: -16px;
+  background: radial-gradient(circle at 50% 85%, #ffffff 0%, #ffe082 40%, #ff9800 85%);
+  filter: blur(1px);
+  animation: flameFlicker 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes flameFlicker {
+  0% {
+    transform: scale(0.96, 0.94) rotate(-2deg);
+  }
+  50% {
+    transform: scale(1.04, 1.05) rotate(3deg);
+  }
+  100% {
+    transform: scale(0.98, 1.02) rotate(-1deg);
+  }
+}
+
+/* Rising Fire Sparks */
+.flame-spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffecb3;
+  box-shadow: 0 0 6px #ff9800;
+  bottom: 20px;
+}
+
+.spark-1 {
+  left: 45%;
+  animation: sparkRise 2.2s ease-out infinite;
+}
+
+.spark-2 {
+  left: 55%;
+  animation: sparkRise 2.8s ease-out infinite 0.7s;
+}
+
+.spark-3 {
+  left: 35%;
+  animation: sparkRise 1.9s ease-out infinite 1.2s;
+}
+
+.spark-4 {
+  left: 65%;
+  animation: sparkRise 2.5s ease-out infinite 1.8s;
+}
+
+@keyframes sparkRise {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(18px, -120px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Campfire Wood Logs */
+.wood-logs {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 45px;
+  z-index: 2;
+}
+
+.log {
+  position: absolute;
+  height: 18px;
+  border-radius: 9px;
+  background: linear-gradient(90deg, #1f140e 0%, #3e271d 40%, #2a1810 100%);
+  border: 1px solid #140a05;
+  box-shadow: inset 0 2px 4px rgba(255, 140, 26, 0.3);
+}
+
+.log-left {
+  width: 140px;
+  bottom: 4px;
+  left: 10px;
+  transform: rotate(-14deg);
+}
+
+.log-right {
+  width: 140px;
+  bottom: 4px;
+  right: 10px;
+  transform: rotate(14deg);
+}
+
+.log-center {
+  width: 150px;
+  bottom: 0;
+  left: 15px;
+  transform: rotate(1deg);
+}
+
+.ember-bed {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 16px;
+  background: radial-gradient(ellipse at center, #ff5722 0%, #bf360c 60%, transparent 100%);
+  filter: blur(2px);
+}
+
+/* Western Vintage Lantern */
+.western-lantern {
+  position: relative;
+  width: 44px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.85;
+}
+
+.lantern-hook {
+  width: 18px;
+  height: 16px;
+  border: 2px solid #5a422d;
+  border-bottom: none;
+  border-radius: 9px 9px 0 0;
+}
+
+.lantern-cap {
+  width: 36px;
+  height: 8px;
+  background: #3e2c1e;
+  border-radius: 3px 3px 0 0;
+  border: 1px solid #6d4c33;
+}
+
+.lantern-glass {
+  width: 30px;
+  height: 44px;
+  background: rgba(255, 230, 180, 0.15);
+  border: 1px solid #5a422d;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(255, 160, 40, 0.45);
+}
+
+.lantern-flame {
+  width: 10px;
+  height: 16px;
+  background: #ffcc80;
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 0 10px #ff9800;
+  animation: lanternFlicker 1.4s infinite alternate;
+}
+
+@keyframes lanternFlicker {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+.lantern-base {
+  width: 38px;
+  height: 10px;
+  background: #2b1f14;
+  border-radius: 0 0 3px 3px;
+  border: 1px solid #4a3422;
+}
+
+/* Campfire Content Area */
+.campfire-content {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.campfire-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--amber-warm);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.campfire-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--parchment-light);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.campfire-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 340px;
+  margin: 0 auto 1.5rem;
+}
+
+.fire-star {
+  color: var(--amber-warm);
+  font-size: 0.85rem;
+}
+
+.fire-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-warm), transparent);
+}
+
+.campfire-intro-lead {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--parchment-base);
+  max-width: 680px;
+  margin: 0 auto 3.5rem;
+}
+
+/* Campfire Letters Grid */
+.campfire-letters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+  text-align: left;
+}
+
+/* Parchment Letter Card */
+.parchment-letter {
+  background: 
+    linear-gradient(180deg, rgba(28, 22, 20, 0.94) 0%, rgba(20, 15, 14, 0.97) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 4px;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.8),
+    inset 0 0 60px rgba(0, 0, 0, 0.4);
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.parchment-letter:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-bright);
+}
+
+.parchment-pin {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--gold-aged);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.letter-heading {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  padding-bottom: 0.75rem;
+}
+
+.letter-icon {
+  color: var(--red-ember);
+  font-size: 1.1rem;
+}
+
+.letter-body p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--parchment-base);
+  line-height: 1.85;
+  margin-bottom: 1.1rem;
+}
+
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-highlight {
+  color: var(--gold-pale);
+  font-style: italic;
+  border-left: 2px solid var(--amber-warm);
+  padding-left: 1rem;
+  margin-top: 1.25rem;
+}
+
+/* Secondary Western Button */
+.btn-western-secondary {
+  padding: 0.95rem 2rem;
+  font-size: 0.82rem;
+  color: var(--gold-pale);
+  background: rgba(22, 17, 24, 0.9);
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.btn-western-secondary:hover {
+  background: rgba(35, 25, 38, 0.98);
+  border-color: var(--gold-bright);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--amber-glow);
+}
+
+/* -------------------------------------------------------------------
+   8. SCENE FOUR â€” THE BIRTHDAY REVEAL
+   ------------------------------------------------------------------- */
+.scene-birthday {
+  position: relative;
+  min-height: 100vh;
+  padding: 8rem 1.5rem 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-deep-void);
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Ambient Radial Backdrops */
+.birthday-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gold-ambient-radial {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(232, 200, 120, 0.16) 0%, transparent 65%);
+  filter: blur(40px);
+}
+
+.crimson-ambient-radial {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(139, 30, 30, 0.22) 0%, transparent 70%);
+  filter: blur(50px);
+}
+
+/* Birthday Container */
+.birthday-card-container {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+/* Western Grand Crest */
+.birthday-crest {
+  margin-bottom: 2rem;
+}
+
+.crest-wings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.crest-line {
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+}
+
+.crest-gem {
+  color: var(--gold-bright);
+  font-size: 0.95rem;
+  letter-spacing: 0.3em;
+}
+
+/* Present Day Portrait with Grand Gilded Ornate Border */
+.finale-portrait-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2.5rem;
+}
+
+.gold-halo-glow {
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, rgba(232, 200, 120, 0.4) 0%, rgba(196, 30, 58, 0.25) 50%, transparent 75%);
+  filter: blur(15px);
+  z-index: 0;
+  animation: haloPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes haloPulse {
+  0% { transform: scale(0.96); opacity: 0.7; }
+  100% { transform: scale(1.04); opacity: 1; }
+}
+
+.finale-photo-frame {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-charcoal);
+  padding: 14px;
+  border: 3px double var(--gold-bright);
+  border-radius: 6px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.95),
+    0 0 35px var(--amber-glow);
+  display: inline-block;
+}
+
+.finale-photo {
+  width: 280px;
+  height: 350px;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  filter: contrast(1.08) brightness(1.02);
+}
+
+.finale-photo-badge {
+  margin-top: 10px;
+  padding: 5px 12px;
+  background: linear-gradient(180deg, #2b1f14 0%, #170f07 100%);
+  border: 1px solid var(--gold-bright);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gold-pale);
+  text-transform: uppercase;
+}
+
+/* Grand Birthday Title */
+.birthday-grand-title {
+  margin-bottom: 2.5rem;
+}
+
+.title-top-banner {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  color: var(--red-ember);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.title-main-reveal {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5.2vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  color: var(--parchment-light);
+  text-transform: uppercase;
+  text-shadow: 
+    0 3px 15px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(232, 200, 120, 0.5);
+}
+
+/* Birthday Message Box */
+.birthday-message-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold-strong);
+  border-radius: 6px;
+  padding: 3rem 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.85),
+    inset 0 0 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.birthday-opening-line {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold-pale);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+.birthday-body-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--parchment-base);
+  line-height: 1.85;
+  margin-bottom: 1.1rem;
+}
+
+/* Signature Block */
+.birthday-signature-block {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(197, 160, 89, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.signature-pre {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--parchment-dim);
+}
+
+.signature-name {
+  font-family: var(--font-western);
+  font-size: 1.8rem;
+  color: var(--gold-bright);
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+.signature-date {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--red-ember);
+  text-transform: uppercase;
+}
+
+/* Interactive Celebration Toast Row */
+.celebration-trigger-row {
+  margin-bottom: 3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-western-gold {
+  padding: 1.15rem 2.5rem;
+  font-size: 0.95rem;
+  color: #0b0709;
+  background: linear-gradient(135deg, #f5d48b 0%, #d4a754 50%, #997328 100%);
+  border: 1px solid var(--gold-bright);
+  border-radius: 4px;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.8),
+    0 0 25px var(--amber-glow);
+}
+
+.btn-western-gold:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, #fff2cc 0%, #e6bd66 50%, #b88d30 100%);
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(232, 200, 120, 0.75);
+}
+
+.toast-popup {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  background: rgba(25, 18, 22, 0.96);
+  border: 1px solid var(--gold-bright);
+  color: var(--gold-pale);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.toast-popup.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Closing Cinematic Quote Banner */
+.cinematic-closing-banner {
+  margin-bottom: 3.5rem;
+}
+
+.closing-quote {
+  font-family: var(--font-western);
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  letter-spacing: 0.15em;
+  color: var(--parchment-light);
+  text-transform: uppercase;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.9),
+    0 0 20px var(--red-glow);
+}
+
+/* Replay Link */
+.replay-journey-wrap {
+  margin-top: 2rem;
+}
+
+.replay-btn {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+.replay-btn:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+  background: rgba(197, 160, 89, 0.1);
+}
+
+/* -------------------------------------------------------------------
+   9. FOOTER & CUSTOMIZER MODAL
+   ------------------------------------------------------------------- */
+.site-footer {
+  position: relative;
+  z-index: 10;
+  padding: 4rem 1.5rem 3rem;
+  background: #050406;
+  border-top: 1px solid var(--border-gold);
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.footer-flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--gold-aged);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-aged), transparent);
+}
+
+.footer-credit {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--parchment-base);
+  margin-bottom: 0.4rem;
+}
+
+.footer-credit strong {
+  color: var(--gold-bright);
+}
+
+.footer-notes {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+}
+
+.footer-guide-btn {
+  background: transparent;
+  border: 1px dashed var(--border-gold);
+  color: var(--gold-bright);
+  padding: 0.5rem 1.2rem;
+  border-radius: 3px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.footer-guide-btn:hover {
+  background: rgba(197, 160, 89, 0.15);
+  border-color: var(--gold-bright);
+}
+
+/* Customizer Modal Overlay */
+.customizer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(5, 4, 6, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.customizer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.customizer-card {
+  background: #141016;
+  border: 2px solid var(--gold-bright);
+  border-radius: 6px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+}
+
+.customizer-header {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.customizer-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--gold-bright);
+  letter-spacing: 0.1em;
+}
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  color: var(--parchment-dim);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.close-modal-btn:hover {
+  color: var(--red-ember);
+}
+
+.customizer-body {
+  padding: 1.75rem;
+  overflow-y: auto;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.guide-step {
+  margin-bottom: 1.8rem;
+}
+
+.guide-step h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--amber-warm);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.guide-step p, .guide-step li {
+  color: var(--parchment-base);
+  font-size: 0.88rem;
+}
+
+.guide-step ul, .guide-step ol {
+  padding-left: 1.4rem;
+  margin-top: 0.5rem;
+}
+
+.guide-step code {
+  background: #241c22;
+  color: var(--gold-pale);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.customizer-footer {
+  padding: 1rem 1.75rem;
+  border-top: 1px solid var(--border-gold);
+  text-align: right;
+  background: #0d0a0f;
+}
+
+/* -------------------------------------------------------------------
+   10. RESPONSIVE DESIGN & MOBILE BREAKPOINTS
+   ------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .chapter-grid {
+    gap: 3rem;
+  }
+
+  .chapter-body {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hud-height: 56px;
+  }
+
+  .hud-inner {
+    padding: 0 1rem;
+  }
+
+  .hud-brand .hud-title {
+    display: none;
+  }
+
+  .hud-nav {
+    gap: 0.9rem;
+  }
+
+  .hud-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hud-btn.music-btn {
+    padding: 0.35rem 0.65rem;
+  }
+
+  .audio-status-text {
+    display: none;
+  }
+
+  /* Timeline Single Column Mobile Alignment */
+  .timeline-spine {
+    left: 24px;
+    transform: none;
+  }
+
+  .timeline-marker {
+    left: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .marker-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .marker-number {
+    font-size: 0.85rem;
+  }
+
+  .chapter-grid,
+  .reverse-layout .chapter-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    padding-left: 3.5rem;
+    direction: ltr;
+  }
+
+  .chapter-photo {
+    aspect-ratio: 16 / 11;
+    max-height: 320px;
+  }
+
+  .chapter-body {
+    padding: 1.5rem;
+  }
+
+  /* Campfire Letters Stack */
+  .campfire-visual-wrap {
+    gap: 1.5rem;
+    transform: scale(0.9);
+  }
+
+  .campfire-letters-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .parchment-letter {
+    padding: 1.8rem 1.4rem;
+  }
+
+  .birthday-message-box {
+    padding: 2rem 1.4rem;
+  }
+
+  .finale-photo {
+    width: 220px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .btn-western-primary {
+    padding: 1rem 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  .chapter-grid {
+    padding-left: 2.8rem;
+  }
+
+  .timeline-spine,
+  .timeline-marker {
+    left: 14px;
+  }
+}
+
+/* -------------------------------------------------------------------
+   11. ACCESSIBILITY: REDUCED MOTION PREFERENCES
+   ------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .western-landscape-svg {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .flame-tongue,
+  .flame-spark,
+  .lantern-flame,
+  .ambient-fire-glow,
+  .night-stars,
+  .gold-halo-glow {
+    animation: none !important;
+  }
+
+  .timeline-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="western-theme">
+
+  <!-- Atmospheric Canvas Layer for Drifting Dust & Fire Embers -->
+  <canvas id="ambient-particles" class="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Cinematic Vignette & Vintage Film Grain Overlays -->
+  <div class="vignette-overlay" aria-hidden="true"></div>
+  <div class="film-grain-overlay" aria-hidden="true"></div>
+
+  <!-- Top Persistent Navigation Bar -->
+  <header class="hud-header" id="top-hud">
+    <div class="hud-inner">
+      <div class="hud-brand">
+        <span class="hud-star">â˜…</span>
+        <span class="hud-title">THE LEGEND OF TUSHAR</span>
+        <span class="hud-star">â˜…</span>
+      </div>
+
+      <nav class="hud-nav" aria-label="Journey Chapters">
+        <a href="#scene-opening" class="hud-link active">Trailhead</a>
+        <a href="#scene-timeline" class="hud-link">The Journey</a>
+        <a href="#scene-campfire" class="hud-link">The Campfire</a>
+        <a href="#scene-birthday" class="hud-link">The Reveal</a>
+      </nav>
+
+      <!-- Music & Audio Controls -->
+      <div class="hud-audio-controls">
+        <button id="music-toggle" class="hud-btn music-btn" aria-label="Toggle ambient Western music" title="Toggle Western soundtrack">
+          <span class="audio-icon" aria-hidden="true">
+            <svg class="icon-speaker" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path class="speaker-body" d="M3 9v6h4l5 5V4L7 9H3z" />
+              <path class="sound-wave wave-1" d="M16.5 7.5c1 1.2 1.5 2.8 1.5 4.5s-.5 3.3-1.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path class="sound-wave wave-2" d="M19 5c2 2 3 4.5 3 7s-1 5-3 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <line class="mute-slash" x1="1" y1="1" x2="23" y2="23" stroke="#e53935" stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="audio-status-text">Music: <strong class="audio-state-label">OFF</strong></span>
+          <span class="audio-indicator-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- SCENE ONE: CINEMATIC OPENING                                      -->
+  <!-- ================================================================= -->
+  <section id="scene-opening" class="scene scene-hero" aria-label="Cinematic Opening">
+    <!-- Western Dusk Landscape Artwork (Pure SVG with Ken Burns motion) -->
+    <div class="landscape-backdrop" aria-hidden="true">
+      <svg class="western-landscape-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <!-- Sunset Sky Gradient -->
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0a070e" />
+            <stop offset="35%" stop-color="#280c18" />
+            <stop offset="60%" stop-color="#5a151b" />
+            <stop offset="82%" stop-color="#99321e" />
+            <stop offset="93%" stop-color="#d66826" />
+            <stop offset="100%" stop-color="#f3a444" />
+          </linearGradient>
+
+          <!-- Sun Glow Radial -->
+          <radialGradient id="sunGlow" cx="50%" cy="88%" r="45%">
+            <stop offset="0%" stop-color="#ffe699" stop-opacity="0.9" />
+            <stop offset="30%" stop-color="#f39237" stop-opacity="0.6" />
+            <stop offset="70%" stop-color="#c41e3a" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+          </radialGradient>
+
+          <!-- Distant Mesa Gradient -->
+          <linearGradient id="mesaFar" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#3a111a" />
+            <stop offset="100%" stop-color="#19060b" />
+          </linearGradient>
+
+          <!-- Mid Canyon Gradient -->
+          <linearGradient id="canyonMid" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1f090d" />
+            <stop offset="100%" stop-color="#0e0406" />
+          </linearGradient>
+
+          <!-- Foreground Ridge Gradient -->
+          <linearGradient id="ridgeFore" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#120508" />
+            <stop offset="100%" stop-color="#050102" />
+          </linearGradient>
+        </defs>
+
+        <!-- Sky & Sun Glow -->
+        <rect width="1920" height="1080" fill="url(#skyGrad)" />
+        <rect width="1920" height="1080" fill="url(#sunGlow)" />
+
+        <!-- Distant Mesa Plateau Mountains (Layer 1) -->
+        <path d="M0,740 L120,700 L260,700 L340,750 L480,720 L620,720 L710,760 L850,710 L980,710 L1080,770 L1240,690 L1410,690 L1520,750 L1680,710 L1810,710 L1920,750 L1920,1080 L0,1080 Z" fill="url(#mesaFar)" opacity="0.85" />
+
+        <!-- Mid-range Rugged Cliffs & Canyon (Layer 2) -->
+        <path d="M0,810 Q280,760 560,820 T1120,790 Q1480,770 1920,830 L1920,1080 L0,1080 Z" fill="url(#canyonMid)" />
+
+        <!-- Foreground Desert Ridge with Saguaro Cacti & Cowboy Silhouette (Layer 3) -->
+        <path d="M0,890 Q220,870 450,910 Q780,850 1150,920 Q1500,880 1920,930 L1920,1080 L0,1080 Z" fill="url(#ridgeFore)" />
+
+        <!-- Left Saguaro Cactus Silhouette -->
+        <g fill="#070204">
+          <path d="M180,920 L180,770 Q180,760 190,760 Q200,760 200,770 L200,920 Z" />
+          <!-- Left Arm -->
+          <path d="M180,830 L150,830 Q140,830 140,820 L140,780 Q140,770 150,770 Q160,770 160,780 L160,815 L180,815 Z" />
+          <!-- Right Arm -->
+          <path d="M200,810 L230,810 Q240,810 240,800 L240,750 Q240,740 250,740 Q260,740 260,750 L260,795 L200,795 Z" />
+        </g>
+
+        <!-- Right Saguaro Cactus Silhouette -->
+        <g fill="#070204">
+          <path d="M1720,930 L1720,790 Q1720,780 1730,780 Q1740,780 1740,790 L1740,930 Z" />
+          <!-- Left Arm -->
+          <path d="M1720,850 L1690,850 Q1680,850 1680,840 L1680,800 Q1680,790 1690,790 Q1700,790 1700,800 L1700,835 L1720,835 Z" />
+          <!-- Right Arm -->
+          <path d="M1740,830 L1770,830 Q1780,830 1780,820 L1780,770 Q1780,760 1790,760 Q1800,760 1800,770 L1800,815 L1740,815 Z" />
+        </g>
+
+        <!-- Center-Right: Dramatic Lone Cowboy on Horse Silhouette -->
+        <g fill="#070204" transform="translate(1320, 710) scale(0.68)">
+          <!-- Horse Silhouette -->
+          <path d="M80,240 C60,210 50,170 70,140 C85,120 120,110 160,120 C180,105 210,80 230,50 C235,42 245,45 242,55 C238,70 235,90 255,100 C270,108 290,110 280,125 C265,145 250,140 240,150 C220,170 215,200 210,240 C210,260 215,310 210,340 L195,340 C195,290 190,260 180,240 L140,240 C135,270 135,305 130,340 L115,340 C118,290 115,260 100,240 Z" />
+          <!-- Horse Back Legs -->
+          <path d="M75,220 C60,250 50,290 45,340 L60,340 C70,295 85,265 95,230 Z" />
+          <path d="M90,210 C80,245 75,285 70,335 L85,335 C95,290 105,250 115,215 Z" />
+          <!-- Horse Mane & Tail -->
+          <path d="M60,165 C40,195 25,235 30,270 C35,250 45,210 65,185 Z" />
+          <!-- Cowboy Rider with Hat -->
+          <path d="M145,130 C135,110 135,80 145,60 C140,45 130,25 145,15 C150,12 165,12 170,18 C175,22 170,35 175,50 C185,55 190,75 185,100 C180,115 170,130 165,135 Z" />
+          <!-- Cowboy Hat (Western Wide Brim) -->
+          <ellipse cx="152" cy="18" rx="36" ry="7" transform="rotate(-6 152 18)" />
+          <path d="M136,16 C138,5 162,2 168,14 Z" />
+          <!-- Reins -->
+          <path d="M170,75 Q210,95 260,115" stroke="#070204" stroke-width="3" fill="none" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Atmospheric Ground Fog Layer -->
+    <div class="mist-layer" aria-hidden="true"></div>
+
+    <!-- Hero Content Card -->
+    <div class="hero-content">
+      <div class="hero-kicker-wrap">
+        <span class="kicker-ornament">â—ˆ â”€â”€â”€</span>
+        <span class="hero-kicker">THE START OF TUSHAR'S JOURNEY</span>
+        <span class="kicker-ornament">â”€â”€â”€ â—ˆ</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="title-sub">THE</span>
+        <span class="title-main">LEGEND</span>
+        <span class="title-sub">OF</span>
+        <span class="title-name">TUSHAR</span>
+      </h1>
+
+      <div class="hero-divider">
+        <span class="star-accent">â˜…</span>
+        <span class="line-accent"></span>
+        <span class="star-accent center-star">â˜…</span>
+        <span class="line-accent"></span>
+        <span class="star-accent">â˜…</span>
+      </div>
+
+      <p class="hero-subtitle">â€œEvery legend has a beginning. This one is his.â€</p>
+
+      <div class="hero-actions">
+        <button id="btn-begin" class="btn btn-western-primary" type="button">
+          <span class="btn-border-corner top-left"></span>
+          <span class="btn-border-corner top-right"></span>
+          <span class="btn-border-corner bottom-left"></span>
+          <span class="btn-border-corner bottom-right"></span>
+          <span class="btn-icon">âš¡</span>
+          <span class="btn-text">BEGIN THE JOURNEY</span>
+          <span class="btn-glow"></span>
+        </button>
+
+        <a href="#scene-timeline" class="skip-intro-btn" id="skip-intro-link">
+          Skip to Timeline &darr;
+        </a>
+      </div>
+
+      <div class="hero-tip">
+        <span class="tip-icon">â™«</span>
+        <span class="tip-text">Click <em>Begin the Journey</em> to step into the trail and start the cinematic ambience.</span>
+      </div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-mouse">
+        <span class="scroll-wheel"></span>
+      </span>
+      <span class="scroll-text">SCROLL THE TRAIL</span>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SCENE TWO: THE LIVING TIMELINE                                   -->
+  <!-- ================================================================= -->
+  <main>
+    <section id="scene-timeline" class="scene scene-timeline" aria-label="Life Timeline Chapters">
+      <div class="timeline-container">
+
+        <!-- Timeline Header -->
+        <header class="section-header">
+          <div class="kicker-badge">CHRONICLES OF A LIFE</div>
+          <h2 class="section-title">THE LIVING TIMELINE</h2>
+          <div class="header-flourish" aria-hidden="true">
+            <span class="flourish-line"></span>
+            <span class="flourish-diamond">â—†</span>
+            <span class="flourish-line"></span>
+          </div>
+          <p class="section-subtitle">
+            Every step, every year, every milestone shaped the man standing here today. Five chapters of courage, humor, growth, and character.
+          </p>
+        </header>
+
+        <!-- Timeline Central Spine -->
+        <div class="timeline-trail">
+          <div class="timeline-spine" aria-hidden="true"></div>
+
+          <!-- ========================================================= -->
+          <!-- CHAPTER 1: THE BEGINNING                                 -->
+          <!-- ========================================================= -->
+          <article class="timeline-card chapter-card" id="chapter-1" data-chapter="1">
+            <div class="timeline-marker" aria-hidden="true">
+              <span class="marker-circle">
+                <span class="marker-number">I</span>
+              </span>
+            </div>
+
+            <div class="chapter-grid">
+              <!-- Photo Slot -->
+              <div class="chapter-media">
+                <figure class="photo-frame">
+                  <div class="frame-corner corner-tl"></div>
+                  <div class="frame-corner corner-tr"></div>
+                  <div class="frame-corner corner-bl"></div>
+                  <div class="frame-corner corner-br"></div>
+                  
+                  <!-- 
+                    PHOTO REPLACEMENT INSTRUCTION:
+                    Place your photo at: assets/photos/tushar-newborn.jpg
+                    Fallback automatically loads placeholder-chapter-1.svg if missing.
+                  -->
+                  <img 
+                    src="assets/photos/tushar-newborn.jpg" 
+                    alt="Tushar as a newborn baby" 
+                    class="chapter-photo"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%201000%22%20width%3D%22800%22%20height%3D%221000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22bgGrad%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231e1814%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23120e0c%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23080706%22%20%2F%3E%0A%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%3Cpattern%20id%3D%22dust%22%20width%3D%2260%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2215%22%20r%3D%221%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.15%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2245%22%20cy%3D%2238%22%20r%3D%221.5%22%20fill%3D%22%23e28743%22%20opacity%3D%220.1%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%2252%22%20r%3D%220.8%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.12%22%20%2F%3E%0A%20%20%20%20%3C%2Fpattern%3E%0A%20%20%3C%2Fdefs%3E%0A%0A%20%20%3C!--%20Background%20--%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23bgGrad)%22%20%2F%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23dust)%22%20%2F%3E%0A%0A%20%20%3C!--%20Outer%20Borders%20--%3E%0A%20%20%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%22750%22%20height%3D%22950%22%20fill%3D%22none%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2235%22%20y%3D%2235%22%20width%3D%22730%22%20height%3D%22930%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%2216%206%22%20opacity%3D%220.8%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22710%22%20height%3D%22910%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%20%2F%3E%0A%0A%20%20%3C!--%20Western%20Corner%20Ornaments%20--%3E%0A%20%20%3Cg%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3C!--%20Top%20Left%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C85%20L85%2C85%20L85%2C45%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2285%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3C!--%20Top%20Right%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C85%20L715%2C85%20L715%2C45%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22715%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3C!--%20Bottom%20Left%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C915%20L85%2C915%20L85%2C955%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%2285%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3C!--%20Bottom%20Right%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C915%20L715%2C915%20L715%2C955%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22715%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3C!--%20Central%20Crest%20%2F%20Archival%20Frame%20--%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22130%22%20fill%3D%22%23140f0c%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22120%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%228%204%22%20%2F%3E%0A%0A%20%20%3C!--%20Western%20Star%20%26%20Cradle%20Icon%20--%3E%0A%20%20%3Cg%20fill%3D%22%23c5a059%22%20opacity%3D%220.9%22%3E%0A%20%20%20%20%3C!--%20Star%20icon%20above%20--%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22400%2C285%20404%2C297%20417%2C297%20406%2C305%20410%2C317%20400%2C310%20390%2C317%20394%2C305%20383%2C297%20396%2C297%22%20%2F%3E%0A%20%20%20%20%3C!--%20Symbolic%20newborn%20cradle%20%2F%20star%20icon%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M340%2C390%20C340%2C430%20460%2C430%20460%2C390%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%223%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22365%22%20r%3D%2222%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.4%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M330%2C410%20C370%2C445%20430%2C445%20470%2C410%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3C!--%20Typography%20--%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22580%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2216%22%20fill%3D%22%238b1e1e%22%20letter-spacing%3D%226%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ECHAPTER%20I%20%C3%A2%E2%82%AC%C2%A2%20ARCHIVAL%20PHOTO%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22630%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2234%22%20fill%3D%22%23e8d5b5%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ETHE%20BEGINNING%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22670%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2218%22%20fill%3D%22%23c5a059%22%20letter-spacing%3D%222%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3EAge%3A%20Newborn%3C%2Ftext%3E%0A%0A%20%20%3C!--%20Slot%20Prompt%20Box%20--%3E%0A%20%20%3Crect%20x%3D%22180%22%20y%3D%22730%22%20width%3D%22440%22%20height%3D%2285%22%20rx%3D%226%22%20fill%3D%22%23181310%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%221.5%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22763%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2214%22%20fill%3D%22%23e8d5b5%22%20text-anchor%3D%22middle%22%3EREPLACE%20WITH%20YOUR%20PHOTO%3A%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22790%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2215%22%20fill%3D%22%23e28743%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3Eassets%2Fphotos%2Ftushar-newborn.jpg%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22870%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%238d7f71%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3E%C3%A2%E2%82%AC%C5%93Every%20legend%20has%20a%20beginning...%C3%A2%E2%82%AC%C2%9D%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A';"
+                  >
+                  <figcaption class="photo-plate">
+                    <span class="plate-chapter">CHAPTER I</span>
+                    <span class="plate-title">THE BEGINNING</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <!-- Narrative Text Content -->
+              <div class="chapter-body">
+                <div class="chapter-tag-row">
+                  <span class="badge-age">Age: Newborn</span>
+                  <span class="badge-status">Origin</span>
+                </div>
+                <h3 class="chapter-heading">THE BEGINNING</h3>
+                
+                <!-- 
+                  =======================================================
+                  EDITABLE SECTION: CHAPTER 1 NARRATIVE
+                  Replace or tweak this text to match your exact memory!
+                  =======================================================
+                -->
+                <div class="chapter-text-block">
+                  <p class="narrative-quote">â€œThe day you were bornâ€¦â€</p>
+                  <p class="narrative-paragraph">
+                    Long before the long drives, late-night talks, and ambitious dreams, a quiet little legend entered the world. Small, curious, and completely unaware of how many lives he would touch and brighten down the trail.
+                  </p>
+                  <p class="narrative-paragraph">
+                    Every grand story in the frontier starts with a humble dawn. This was yours â€” the first breath of an extraordinary adventure.
+                  </p>
+                </div>
+
+                <div class="chapter-signature-stamp">
+                  <span class="stamp-icon">âœ¦</span>
+                  <span class="stamp-text">CHAPTER I â€¢ RECORDED IN MEMORY</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ========================================================= -->
+          <!-- CHAPTER 2: THE LITTLE COWBOY                             -->
+          <!-- ========================================================= -->
+          <article class="timeline-card chapter-card reverse-layout" id="chapter-2" data-chapter="2">
+            <div class="timeline-marker" aria-hidden="true">
+              <span class="marker-circle">
+                <span class="marker-number">II</span>
+              </span>
+            </div>
+
+            <div class="chapter-grid">
+              <!-- Photo Slot -->
+              <div class="chapter-media">
+                <figure class="photo-frame">
+                  <div class="frame-corner corner-tl"></div>
+                  <div class="frame-corner corner-tr"></div>
+                  <div class="frame-corner corner-bl"></div>
+                  <div class="frame-corner corner-br"></div>
+
+                  <!-- 
+                    PHOTO REPLACEMENT INSTRUCTION:
+                    Place your photo at: assets/photos/tushar-age-3.jpg
+                    Fallback automatically loads placeholder-chapter-2.svg if missing.
+                  -->
+                  <img 
+                    src="assets/photos/tushar-age-3.jpg" 
+                    alt="Tushar at 3 years old" 
+                    class="chapter-photo"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%201000%22%20width%3D%22800%22%20height%3D%221000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22bgGrad2%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231e1814%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23120e0c%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23080706%22%20%2F%3E%0A%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%3Cpattern%20id%3D%22dust2%22%20width%3D%2260%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2215%22%20cy%3D%2220%22%20r%3D%221.2%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.15%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2248%22%20cy%3D%2242%22%20r%3D%221.5%22%20fill%3D%22%23e28743%22%20opacity%3D%220.12%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2255%22%20r%3D%220.8%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.1%22%20%2F%3E%0A%20%20%20%20%3C%2Fpattern%3E%0A%20%20%3C%2Fdefs%3E%0A%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23bgGrad2)%22%20%2F%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23dust2)%22%20%2F%3E%0A%0A%20%20%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%22750%22%20height%3D%22950%22%20fill%3D%22none%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2235%22%20y%3D%2235%22%20width%3D%22730%22%20height%3D%22930%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%2216%206%22%20opacity%3D%220.8%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22710%22%20height%3D%22910%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%20%2F%3E%0A%0A%20%20%3Cg%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C85%20L85%2C85%20L85%2C45%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C85%20L715%2C85%20L715%2C45%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C915%20L85%2C915%20L85%2C955%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C915%20L715%2C915%20L715%2C955%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22130%22%20fill%3D%22%23140f0c%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22120%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%228%204%22%20%2F%3E%0A%0A%20%20%3C!--%20Little%20Cowboy%20Hat%20%26%20Horseshoe%20motif%20--%3E%0A%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20opacity%3D%220.9%22%3E%0A%20%20%20%20%3C!--%20Horseshoe%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M350%2C340%20C350%2C300%20450%2C300%20450%2C340%20C450%2C420%20350%2C420%20350%2C340%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22370%22%20cy%3D%22335%22%20r%3D%223%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22370%22%20cy%3D%22365%22%20r%3D%223%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22370%22%20cy%3D%22395%22%20r%3D%223%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22430%22%20cy%3D%22335%22%20r%3D%223%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22430%22%20cy%3D%22365%22%20r%3D%223%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22430%22%20cy%3D%22395%22%20r%3D%223%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3C!--%20Hat%20Brim%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M320%2C425%20Q400%2C410%20480%2C425%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%223%22%20%2F%3E%0A%20%20%20%20%3C!--%20Hat%20Crown%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M355%2C420%20C355%2C395%20380%2C390%20400%2C395%20C420%2C390%20445%2C395%20445%2C420%22%20fill%3D%22%232d1c14%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22580%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2216%22%20fill%3D%22%238b1e1e%22%20letter-spacing%3D%226%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ECHAPTER%20II%20%C3%A2%E2%82%AC%C2%A2%20ARCHIVAL%20PHOTO%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22630%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2234%22%20fill%3D%22%23e8d5b5%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ETHE%20LITTLE%20COWBOY%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22670%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2218%22%20fill%3D%22%23c5a059%22%20letter-spacing%3D%222%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3EAge%3A%203%20Years%3C%2Ftext%3E%0A%0A%20%20%3Crect%20x%3D%22180%22%20y%3D%22730%22%20width%3D%22440%22%20height%3D%2285%22%20rx%3D%226%22%20fill%3D%22%23181310%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%221.5%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22763%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2214%22%20fill%3D%22%23e8d5b5%22%20text-anchor%3D%22middle%22%3EREPLACE%20WITH%20YOUR%20PHOTO%3A%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22790%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2215%22%20fill%3D%22%23e28743%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3Eassets%2Fphotos%2Ftushar-age-3.jpg%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22870%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%238d7f71%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3E%C3%A2%E2%82%AC%C5%93A%20little%20cowboy%20in%20the%20making...%C3%A2%E2%82%AC%C2%9D%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A';"
+                  >
+                  <figcaption class="photo-plate">
+                    <span class="plate-chapter">CHAPTER II</span>
+                    <span class="plate-title">THE LITTLE COWBOY</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <!-- Narrative Text Content -->
+              <div class="chapter-body">
+                <div class="chapter-tag-row">
+                  <span class="badge-age">Age: 3 Years</span>
+                  <span class="badge-status">Wild Spirit</span>
+                </div>
+                <h3 class="chapter-heading">THE LITTLE COWBOY</h3>
+                
+                <!-- 
+                  =======================================================
+                  EDITABLE SECTION: CHAPTER 2 NARRATIVE
+                  Replace or tweak this text to match your exact memory!
+                  =======================================================
+                -->
+                <div class="chapter-text-block">
+                  <p class="narrative-quote">â€œA little cowboy in the making.â€</p>
+                  <p class="narrative-paragraph">
+                    Full of mischief, boundless energy, and that sparkling curiosity that you still carry today. Running through the halls, exploring every corner, with a smile that could disarm anyone in an instant.
+                  </p>
+                  <p class="narrative-paragraph">
+                    Even back then, you were fearless in your own gentle way â€” ready to take on whatever game or challenge was placed in front of you.
+                  </p>
+                </div>
+
+                <div class="chapter-signature-stamp">
+                  <span class="stamp-icon">âœ¦</span>
+                  <span class="stamp-text">CHAPTER II â€¢ THE WILD YEARS</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ========================================================= -->
+          <!-- CHAPTER 3: THE WORLD WAS GETTING BIGGER                   -->
+          <!-- ========================================================= -->
+          <article class="timeline-card chapter-card" id="chapter-3" data-chapter="3">
+            <div class="timeline-marker" aria-hidden="true">
+              <span class="marker-circle">
+                <span class="marker-number">III</span>
+              </span>
+            </div>
+
+            <div class="chapter-grid">
+              <!-- Photo Slot -->
+              <div class="chapter-media">
+                <figure class="photo-frame">
+                  <div class="frame-corner corner-tl"></div>
+                  <div class="frame-corner corner-tr"></div>
+                  <div class="frame-corner corner-bl"></div>
+                  <div class="frame-corner corner-br"></div>
+
+                  <!-- 
+                    PHOTO REPLACEMENT INSTRUCTION:
+                    Place your photo at: assets/photos/tushar-age-19-20.jpg
+                    Fallback automatically loads placeholder-chapter-3.svg if missing.
+                  -->
+                  <img 
+                    src="assets/photos/tushar-age-19-20.jpg" 
+                    alt="Tushar at 19-20 years old" 
+                    class="chapter-photo"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%201000%22%20width%3D%22800%22%20height%3D%221000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22bgGrad3%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231e1814%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23120e0c%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23080706%22%20%2F%3E%0A%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%3Cpattern%20id%3D%22dust3%22%20width%3D%2260%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2218%22%20cy%3D%2222%22%20r%3D%221%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.15%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2244%22%20cy%3D%2248%22%20r%3D%221.3%22%20fill%3D%22%23e28743%22%20opacity%3D%220.12%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2230%22%20cy%3D%2258%22%20r%3D%220.9%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.1%22%20%2F%3E%0A%20%20%20%20%3C%2Fpattern%3E%0A%20%20%3C%2Fdefs%3E%0A%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23bgGrad3)%22%20%2F%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23dust3)%22%20%2F%3E%0A%0A%20%20%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%22750%22%20height%3D%22950%22%20fill%3D%22none%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2235%22%20y%3D%2235%22%20width%3D%22730%22%20height%3D%22930%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%2216%206%22%20opacity%3D%220.8%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22710%22%20height%3D%22910%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%20%2F%3E%0A%0A%20%20%3Cg%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C85%20L85%2C85%20L85%2C45%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C85%20L715%2C85%20L715%2C45%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C915%20L85%2C915%20L85%2C955%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C915%20L715%2C915%20L715%2C955%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22130%22%20fill%3D%22%23140f0c%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22120%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%228%204%22%20%2F%3E%0A%0A%20%20%3C!--%20Compass%20%2F%20Western%20trail%20motif%20--%3E%0A%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20opacity%3D%220.9%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%2260%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%2275%22%20stroke-dasharray%3D%224%208%22%20%2F%3E%0A%20%20%20%20%3C!--%20Compass%20needle%20--%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22400%2C320%20410%2C380%20400%2C372%20390%2C380%22%20fill%3D%22%238b1e1e%22%20stroke%3D%22%238b1e1e%22%20%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22400%2C440%20410%2C380%20400%2C388%20390%2C380%22%20fill%3D%22%23c5a059%22%20stroke%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%225%22%20fill%3D%22%23e8d5b5%22%20%2F%3E%0A%20%20%20%20%3C!--%20Cardinal%20letters%20--%3E%0A%20%20%20%20%3Ctext%20x%3D%22400%22%20y%3D%22312%22%20font-family%3D%22'Cinzel'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%23c5a059%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3EN%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%22400%22%20y%3D%22460%22%20font-family%3D%22'Cinzel'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%23c5a059%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ES%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%22475%22%20y%3D%22385%22%20font-family%3D%22'Cinzel'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%23c5a059%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3EE%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%22325%22%20y%3D%22385%22%20font-family%3D%22'Cinzel'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%23c5a059%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3EW%3C%2Ftext%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22580%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2216%22%20fill%3D%22%238b1e1e%22%20letter-spacing%3D%226%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ECHAPTER%20III%20%C3%A2%E2%82%AC%C2%A2%20ARCHIVAL%20PHOTO%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22630%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2228%22%20fill%3D%22%23e8d5b5%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ETHE%20WORLD%20WAS%20GETTING%20BIGGER%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22670%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2218%22%20fill%3D%22%23c5a059%22%20letter-spacing%3D%222%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3EAge%3A%2019%C3%A2%E2%82%AC%E2%80%9C20%20Years%3C%2Ftext%3E%0A%0A%20%20%3Crect%20x%3D%22180%22%20y%3D%22730%22%20width%3D%22440%22%20height%3D%2285%22%20rx%3D%226%22%20fill%3D%22%23181310%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%221.5%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22763%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2214%22%20fill%3D%22%23e8d5b5%22%20text-anchor%3D%22middle%22%3EREPLACE%20WITH%20YOUR%20PHOTO%3A%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22790%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2215%22%20fill%3D%22%23e28743%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3Eassets%2Fphotos%2Ftushar-age-19-20.jpg%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22870%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%238d7f71%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3E%C3%A2%E2%82%AC%C5%93So%20many%20roads%20still%20waiting%20to%20be%20travelled...%C3%A2%E2%82%AC%C2%9D%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A';"
+                  >
+                  <figcaption class="photo-plate">
+                    <span class="plate-chapter">CHAPTER III</span>
+                    <span class="plate-title">THE WORLD WAS GETTING BIGGER</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <!-- Narrative Text Content -->
+              <div class="chapter-body">
+                <div class="chapter-tag-row">
+                  <span class="badge-age">Age: 19â€“20 Years</span>
+                  <span class="badge-status">The Horizon</span>
+                </div>
+                <h3 class="chapter-heading">THE WORLD WAS GETTING BIGGER</h3>
+                
+                <!-- 
+                  =======================================================
+                  EDITABLE SECTION: CHAPTER 3 NARRATIVE
+                  Replace or tweak this text to match your exact memory!
+                  =======================================================
+                -->
+                <div class="chapter-text-block">
+                  <p class="narrative-quote">â€œSo many roads still waiting to be travelled.â€</p>
+                  <p class="narrative-paragraph">
+                    Standing at the edge of youth and adulthood, looking out over the open horizon. Finding your voice, your passions, and discovering who you wanted to become in this vast world.
+                  </p>
+                  <p class="narrative-paragraph">
+                    The questions were big, the nights were long, but your heart and ambition were already pointing true north. The road had truly begun.
+                  </p>
+                </div>
+
+                <div class="chapter-signature-stamp">
+                  <span class="stamp-icon">âœ¦</span>
+                  <span class="stamp-text">CHAPTER III â€¢ CROSSING THE PLAINS</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ========================================================= -->
+          <!-- CHAPTER 4: BECOMING HIM                                   -->
+          <!-- ========================================================= -->
+          <article class="timeline-card chapter-card reverse-layout" id="chapter-4" data-chapter="4">
+            <div class="timeline-marker" aria-hidden="true">
+              <span class="marker-circle">
+                <span class="marker-number">IV</span>
+              </span>
+            </div>
+
+            <div class="chapter-grid">
+              <!-- Photo Slot -->
+              <div class="chapter-media">
+                <figure class="photo-frame">
+                  <div class="frame-corner corner-tl"></div>
+                  <div class="frame-corner corner-tr"></div>
+                  <div class="frame-corner corner-bl"></div>
+                  <div class="frame-corner corner-br"></div>
+
+                  <!-- 
+                    PHOTO REPLACEMENT INSTRUCTION:
+                    Place your photo at: assets/photos/tushar-age-23-24.jpg
+                    Fallback automatically loads placeholder-chapter-4.svg if missing.
+                  -->
+                  <img 
+                    src="assets/photos/tushar-age-23-24.jpg" 
+                    alt="Tushar at 23-24 years old" 
+                    class="chapter-photo"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%201000%22%20width%3D%22800%22%20height%3D%221000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22bgGrad4%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231e1814%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23120e0c%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23080706%22%20%2F%3E%0A%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%3Cpattern%20id%3D%22dust4%22%20width%3D%2260%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2214%22%20cy%3D%2224%22%20r%3D%221.1%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.15%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2242%22%20cy%3D%2236%22%20r%3D%221.4%22%20fill%3D%22%23e28743%22%20opacity%3D%220.12%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2225%22%20cy%3D%2250%22%20r%3D%220.8%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.1%22%20%2F%3E%0A%20%20%20%20%3C%2Fpattern%3E%0A%20%20%3C%2Fdefs%3E%0A%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23bgGrad4)%22%20%2F%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23dust4)%22%20%2F%3E%0A%0A%20%20%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%22750%22%20height%3D%22950%22%20fill%3D%22none%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2235%22%20y%3D%2235%22%20width%3D%22730%22%20height%3D%22930%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%2216%206%22%20opacity%3D%220.8%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22710%22%20height%3D%22910%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%20%2F%3E%0A%0A%20%20%3Cg%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C85%20L85%2C85%20L85%2C45%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C85%20L715%2C85%20L715%2C45%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C915%20L85%2C915%20L85%2C955%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C915%20L715%2C915%20L715%2C955%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22130%22%20fill%3D%22%23140f0c%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22120%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%228%204%22%20%2F%3E%0A%0A%20%20%3C!--%20Western%20Mountains%20%26%20Sunrise%20motif%20--%3E%0A%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20opacity%3D%220.9%22%3E%0A%20%20%20%20%3C!--%20Rising%20sun%20rays%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M370%2C335%20L350%2C315%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M400%2C325%20L400%2C300%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M430%2C335%20L450%2C315%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22365%22%20r%3D%2225%22%20fill%3D%22%238b1e1e%22%20opacity%3D%220.5%22%20%2F%3E%0A%20%20%20%20%3C!--%20Peaks%20--%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22340%2C430%20380%2C360%20415%2C430%22%20fill%3D%22%23241a14%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22390%2C430%20435%2C340%20480%2C430%22%20fill%3D%22%232d2118%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%20%20%3C!--%20Snow%2FPeak%20highlights%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M380%2C360%20L375%2C375%20L385%2C380%20L390%2C370%22%20fill%3D%22%23e8d5b5%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M435%2C340%20L425%2C360%20L440%2C365%20L445%2C355%22%20fill%3D%22%23e8d5b5%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22580%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2216%22%20fill%3D%22%238b1e1e%22%20letter-spacing%3D%226%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ECHAPTER%20IV%20%C3%A2%E2%82%AC%C2%A2%20ARCHIVAL%20PHOTO%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22630%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2234%22%20fill%3D%22%23e8d5b5%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3EBECOMING%20HIM%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22670%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2218%22%20fill%3D%22%23c5a059%22%20letter-spacing%3D%222%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3EAge%3A%2023%C3%A2%E2%82%AC%E2%80%9C24%20Years%3C%2Ftext%3E%0A%0A%20%20%3Crect%20x%3D%22180%22%20y%3D%22730%22%20width%3D%22440%22%20height%3D%2285%22%20rx%3D%226%22%20fill%3D%22%23181310%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%221.5%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22763%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2214%22%20fill%3D%22%23e8d5b5%22%20text-anchor%3D%22middle%22%3EREPLACE%20WITH%20YOUR%20PHOTO%3A%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22790%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2215%22%20fill%3D%22%23e28743%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3Eassets%2Fphotos%2Ftushar-age-23-24.jpg%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22870%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%238d7f71%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3E%C3%A2%E2%82%AC%C5%93Growing%2C%20learning%2C%20working%2C%20becoming...%C3%A2%E2%82%AC%C2%9D%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A';"
+                  >
+                  <figcaption class="photo-plate">
+                    <span class="plate-chapter">CHAPTER IV</span>
+                    <span class="plate-title">BECOMING HIM</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <!-- Narrative Text Content -->
+              <div class="chapter-body">
+                <div class="chapter-tag-row">
+                  <span class="badge-age">Age: 23â€“24 Years</span>
+                  <span class="badge-status">Forged in Work</span>
+                </div>
+                <h3 class="chapter-heading">BECOMING HIM</h3>
+                
+                <!-- 
+                  =======================================================
+                  EDITABLE SECTION: CHAPTER 4 NARRATIVE
+                  Replace or tweak this text to match your exact memory!
+                  =======================================================
+                -->
+                <div class="chapter-text-block">
+                  <p class="narrative-quote">â€œGrowing, learning, working, becoming.â€</p>
+                  <p class="narrative-paragraph">
+                    The grind, the perseverance, and the discipline. Putting your head down, working through exhausting days, and taking responsibility with quiet pride.
+                  </p>
+                  <p class="narrative-paragraph">
+                    You never asked for fanfare or applause. You simply showed up, built your skills, supported the people around you, and proved what kind of mettle you were made of.
+                  </p>
+                </div>
+
+                <div class="chapter-signature-stamp">
+                  <span class="stamp-icon">âœ¦</span>
+                  <span class="stamp-text">CHAPTER IV â€¢ FORGING CHARACTER</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ========================================================= -->
+          <!-- CHAPTER 5: THE MAN HE IS TODAY                           -->
+          <!-- ========================================================= -->
+          <article class="timeline-card chapter-card" id="chapter-5" data-chapter="5">
+            <div class="timeline-marker" aria-hidden="true">
+              <span class="marker-circle gold-circle">
+                <span class="marker-number">V</span>
+              </span>
+            </div>
+
+            <div class="chapter-grid">
+              <!-- Photo Slot -->
+              <div class="chapter-media">
+                <figure class="photo-frame ornate-frame">
+                  <div class="frame-corner corner-tl"></div>
+                  <div class="frame-corner corner-tr"></div>
+                  <div class="frame-corner corner-bl"></div>
+                  <div class="frame-corner corner-br"></div>
+
+                  <!-- 
+                    PHOTO REPLACEMENT INSTRUCTION:
+                    Place your photo at: assets/photos/tushar-present.jpg
+                    Fallback automatically loads placeholder-chapter-5.svg if missing.
+                  -->
+                  <img 
+                    src="assets/photos/tushar-present.jpg" 
+                    alt="Tushar present day" 
+                    class="chapter-photo"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%201000%22%20width%3D%22800%22%20height%3D%221000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22bgGrad5%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23221914%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23140e0c%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23080706%22%20%2F%3E%0A%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%3Cpattern%20id%3D%22dust5%22%20width%3D%2260%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2220%22%20cy%3D%2225%22%20r%3D%221.2%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.18%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2245%22%20cy%3D%2240%22%20r%3D%221.6%22%20fill%3D%22%23e28743%22%20opacity%3D%220.15%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%2252%22%20r%3D%220.9%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.12%22%20%2F%3E%0A%20%20%20%20%3C%2Fpattern%3E%0A%20%20%3C%2Fdefs%3E%0A%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23bgGrad5)%22%20%2F%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23dust5)%22%20%2F%3E%0A%0A%20%20%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%22750%22%20height%3D%22950%22%20fill%3D%22none%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2235%22%20y%3D%2235%22%20width%3D%22730%22%20height%3D%22930%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%2216%206%22%20opacity%3D%220.9%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22710%22%20height%3D%22910%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221.5%22%20opacity%3D%220.8%22%20%2F%3E%0A%0A%20%20%3Cg%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C85%20L85%2C85%20L85%2C45%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C85%20L715%2C85%20L715%2C45%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C915%20L85%2C915%20L85%2C955%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C915%20L715%2C915%20L715%2C955%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22135%22%20fill%3D%22%2318110d%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222.5%22%20%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22122%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%226%204%22%20%2F%3E%0A%0A%20%20%3C!--%20Western%20Star%20of%20Honor%20%2F%20Laurel%20Wreath%20--%3E%0A%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20opacity%3D%220.95%22%3E%0A%20%20%20%20%3C!--%20Star%20badge%20--%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22400%2C310%20412%2C345%20448%2C345%20420%2C366%20430%2C400%20400%2C380%20370%2C400%20380%2C366%20352%2C345%20388%2C345%22%20fill%3D%22%23c5a059%22%20fill-opacity%3D%220.25%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222.5%22%20%2F%3E%0A%20%20%20%20%3C!--%20Laurel%20Wreath%20arcs%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M335%2C390%20C330%2C440%20370%2C460%20400%2C460%20C430%2C460%20470%2C440%20465%2C390%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%222.5%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22358%22%20r%3D%228%22%20fill%3D%22%238b1e1e%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22580%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2216%22%20fill%3D%22%238b1e1e%22%20letter-spacing%3D%226%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ECHAPTER%20V%20%C3%A2%E2%82%AC%C2%A2%20PRESENT%20DAY%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22630%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2232%22%20fill%3D%22%23e8d5b5%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ETHE%20MAN%20HE%20IS%20TODAY%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22670%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2218%22%20fill%3D%22%23c5a059%22%20letter-spacing%3D%222%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3EAge%3A%20Present%3C%2Ftext%3E%0A%0A%20%20%3Crect%20x%3D%22180%22%20y%3D%22730%22%20width%3D%22440%22%20height%3D%2285%22%20rx%3D%226%22%20fill%3D%22%23181310%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%221.5%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22763%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2214%22%20fill%3D%22%23e8d5b5%22%20text-anchor%3D%22middle%22%3EREPLACE%20WITH%20YOUR%20PHOTO%3A%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22790%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2215%22%20fill%3D%22%23e28743%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3Eassets%2Fphotos%2Ftushar-present.jpg%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22870%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%238d7f71%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3E%C3%A2%E2%82%AC%C5%93And%20look%20at%20the%20man%20you've%20become...%C3%A2%E2%82%AC%C2%9D%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A';"
+                  >
+                  <figcaption class="photo-plate gold-plate">
+                    <span class="plate-chapter">CHAPTER V</span>
+                    <span class="plate-title">THE MAN HE IS TODAY</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <!-- Narrative Text Content -->
+              <div class="chapter-body">
+                <div class="chapter-tag-row">
+                  <span class="badge-age gold-badge">Age: Present</span>
+                  <span class="badge-status gold-status">The Legend</span>
+                </div>
+                <h3 class="chapter-heading gold-heading">THE MAN HE IS TODAY</h3>
+                
+                <!-- 
+                  =======================================================
+                  EDITABLE SECTION: CHAPTER 5 NARRATIVE
+                  Replace or tweak this text to match your exact memory!
+                  =======================================================
+                -->
+                <div class="chapter-text-block">
+                  <p class="narrative-quote">â€œAnd look at the man you've become.â€</p>
+                  <p class="narrative-paragraph">
+                    Resilient, thoughtful, ridiculously funny, and steady as an anchor. The kind of man who makes everyone feel safe, heard, and valued just by walking into the room.
+                  </p>
+                  <p class="narrative-paragraph">
+                    Of all the stories the world has written, being beside you to watch this one unfold is my favorite privilege.
+                  </p>
+                </div>
+
+                <div class="chapter-signature-stamp gold-stamp">
+                  <span class="stamp-icon">â˜…</span>
+                  <span class="stamp-text">CHAPTER V â€¢ THE PRESENT LEGEND</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /.timeline-trail -->
+
+      </div><!-- /.timeline-container -->
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- SCENE THREE: THE CAMPFIRE INTERLUDE                            -->
+    <!-- =============================================================== -->
+    <section id="scene-campfire" class="scene scene-campfire" aria-label="Campfire Interlude">
+      <div class="night-forest-sky" aria-hidden="true">
+        <div class="night-stars"></div>
+        <div class="forest-silhouette"></div>
+      </div>
+
+      <div class="campfire-stage">
+        <!-- Interactive Western Campfire Visual Effect -->
+        <div class="campfire-visual-wrap" aria-hidden="true">
+          <!-- Warm Flickering Lantern -->
+          <div class="western-lantern">
+            <div class="lantern-hook"></div>
+            <div class="lantern-cap"></div>
+            <div class="lantern-glass">
+              <div class="lantern-flame"></div>
+            </div>
+            <div class="lantern-base"></div>
+          </div>
+
+          <!-- Campfire Flame & Logs -->
+          <div class="campfire-core">
+            <div class="ambient-fire-glow"></div>
+            
+            <!-- Animated CSS Flame Layers -->
+            <div class="flame-assembly">
+              <div class="flame-tongue flame-outer flame-1"></div>
+              <div class="flame-tongue flame-outer flame-2"></div>
+              <div class="flame-tongue flame-mid flame-3"></div>
+              <div class="flame-tongue flame-mid flame-4"></div>
+              <div class="flame-tongue flame-inner flame-5"></div>
+              <div class="flame-spark spark-1"></div>
+              <div class="flame-spark spark-2"></div>
+              <div class="flame-spark spark-3"></div>
+              <div class="flame-spark spark-4"></div>
+            </div>
+
+            <!-- Textured Campfire Logs -->
+            <div class="wood-logs">
+              <div class="log log-left"></div>
+              <div class="log log-right"></div>
+              <div class="log log-center"></div>
+              <div class="ember-bed"></div>
+            </div>
+          </div>
+        </div><!-- /.campfire-visual-wrap -->
+
+        <!-- Campfire Narrative Content -->
+        <div class="campfire-content">
+          <div class="campfire-kicker">BY THE FIRELIGHT</div>
+          
+          <h2 class="campfire-title">THE THINGS YOU DON'T ALWAYS HEAR.</h2>
+          
+          <div class="campfire-divider" aria-hidden="true">
+            <span class="fire-star">âœ¦</span>
+            <span class="fire-line"></span>
+            <span class="fire-star">âœ¦</span>
+          </div>
+
+          <p class="campfire-intro-lead">
+            The trail gets loud and busy during the day. But when the night quiets down and the embers glow, this is what remains true:
+          </p>
+
+          <div class="campfire-letters-grid">
+
+            <!-- 
+              =========================================================
+              EDITABLE APPRECIATION MESSAGE:
+              Describe how hard Tushar works, what he does for others,
+              and the little things that make him special!
+              =========================================================
+            -->
+            <div class="parchment-letter appreciation-letter">
+              <div class="parchment-pin"></div>
+              <h3 class="letter-heading">
+                <span class="letter-icon">âšœ</span>
+                WHAT MAKES YOU EXTRAORDINARY
+              </h3>
+              <div class="letter-body">
+                <p>
+                  You are the person who quietly carries more weight than anyone realizes, and you never complain. You wake up with purpose, tackle whatever comes your way, and still find the energy to check in on everyone else.
+                </p>
+                <p>
+                  Itâ€™s how fiercely dependable you are. Itâ€™s the way your laughter can completely shift the mood of a room. Itâ€™s how you listen â€” really listen â€” when someone speaks. The world sees your achievements, but I get to see the sheer integrity, kindness, and patience you bring to everyday life.
+                </p>
+                <p class="letter-highlight">
+                  Never forget: all that quiet effort, all that hard work, and all the goodness you put out into the world does not go unnoticed. You are deeply respected, admired, and cherished.
+                </p>
+              </div>
+            </div>
+
+            <!-- 
+              =========================================================
+              EDITABLE PERSONAL MESSAGE:
+              Hetvi's dedicated personal note for Tushar.
+              Type your personal love note here!
+              =========================================================
+            -->
+            <div class="parchment-letter personal-letter">
+              <div class="parchment-pin"></div>
+              <h3 class="letter-heading">
+                <span class="letter-icon">â¤</span>
+                A PERSONAL NOTE FOR YOU
+              </h3>
+              <div class="letter-body">
+                <!-- EDIT HERE: Personal letter content -->
+                <p>
+                  Tushar, having you as my partner is like finding the warmest camp in the middle of a cold, wide frontier. You are my safe place, my best friend, and my favorite adventure all wrapped into one.
+                </p>
+                <p>
+                  Thank you for the ordinary moments that feel like magic â€” the silly jokes, the comfort of your presence, and how easy you make it to love you. You make my life infinitely brighter just by being in it.
+                </p>
+                <p>
+                  Wherever our trail leads next, thereâ€™s no one else Iâ€™d rather ride beside.
+                </p>
+              </div>
+            </div>
+
+          </div><!-- /.campfire-letters-grid -->
+
+          <!-- Transition to Finale Button -->
+          <div class="campfire-action">
+            <a href="#scene-birthday" class="btn btn-western-secondary">
+              <span>PROCEED TO THE FINALE</span> &rarr;
+            </a>
+          </div>
+
+        </div><!-- /.campfire-content -->
+      </div><!-- /.campfire-stage -->
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- SCENE FOUR: THE BIRTHDAY REVEAL                                -->
+    <!-- =============================================================== -->
+    <section id="scene-birthday" class="scene scene-birthday" aria-label="Birthday Finale">
+      <div class="birthday-backdrop" aria-hidden="true">
+        <div class="gold-ambient-radial"></div>
+        <div class="crimson-ambient-radial"></div>
+      </div>
+
+      <div class="birthday-card-container">
+
+        <!-- Western Grand Crest -->
+        <div class="birthday-crest" aria-hidden="true">
+          <div class="crest-wings">
+            <span class="crest-line"></span>
+            <span class="crest-gem">âœ¦ âœ¦ âœ¦</span>
+            <span class="crest-line"></span>
+          </div>
+        </div>
+
+        <!-- Present Day Photo in Grand Gold Ornate Portrait Frame -->
+        <div class="finale-portrait-wrap">
+          <div class="gold-halo-glow" aria-hidden="true"></div>
+          <figure class="finale-photo-frame">
+            <div class="frame-filigree top-filigree"></div>
+            <div class="frame-filigree bottom-filigree"></div>
+
+            <!-- 
+              PRESENTS THE PRESENT DAY PHOTO:
+              assets/photos/tushar-present.jpg
+            -->
+            <img 
+              src="assets/photos/tushar-present.jpg" 
+              alt="Tushar â€” The Birthday Legend" 
+              class="finale-photo"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%201000%22%20width%3D%22800%22%20height%3D%221000%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22bgGrad5%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23221914%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23140e0c%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23080706%22%20%2F%3E%0A%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%3Cpattern%20id%3D%22dust5%22%20width%3D%2260%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2220%22%20cy%3D%2225%22%20r%3D%221.2%22%20fill%3D%22%23c5a059%22%20opacity%3D%220.18%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2245%22%20cy%3D%2240%22%20r%3D%221.6%22%20fill%3D%22%23e28743%22%20opacity%3D%220.15%22%20%2F%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2228%22%20cy%3D%2252%22%20r%3D%220.9%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.12%22%20%2F%3E%0A%20%20%20%20%3C%2Fpattern%3E%0A%20%20%3C%2Fdefs%3E%0A%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23bgGrad5)%22%20%2F%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%221000%22%20fill%3D%22url(%23dust5)%22%20%2F%3E%0A%0A%20%20%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%22750%22%20height%3D%22950%22%20fill%3D%22none%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%222%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2235%22%20y%3D%2235%22%20width%3D%22730%22%20height%3D%22930%22%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%2216%206%22%20opacity%3D%220.9%22%20%2F%3E%0A%20%20%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22710%22%20height%3D%22910%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221.5%22%20opacity%3D%220.8%22%20%2F%3E%0A%0A%20%20%3Cg%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C85%20L85%2C85%20L85%2C45%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C85%20L715%2C85%20L715%2C45%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%2285%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M45%2C915%20L85%2C915%20L85%2C955%22%20%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M755%2C915%20L715%2C915%20L715%2C955%22%20%2F%3E%3Ccircle%20cx%3D%22715%22%20cy%3D%22915%22%20r%3D%224%22%20fill%3D%22%23c5a059%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22135%22%20fill%3D%22%2318110d%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222.5%22%20%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22380%22%20r%3D%22122%22%20fill%3D%22none%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%226%204%22%20%2F%3E%0A%0A%20%20%3C!--%20Western%20Star%20of%20Honor%20%2F%20Laurel%20Wreath%20--%3E%0A%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20opacity%3D%220.95%22%3E%0A%20%20%20%20%3C!--%20Star%20badge%20--%3E%0A%20%20%20%20%3Cpolygon%20points%3D%22400%2C310%20412%2C345%20448%2C345%20420%2C366%20430%2C400%20400%2C380%20370%2C400%20380%2C366%20352%2C345%20388%2C345%22%20fill%3D%22%23c5a059%22%20fill-opacity%3D%220.25%22%20stroke%3D%22%23c5a059%22%20stroke-width%3D%222.5%22%20%2F%3E%0A%20%20%20%20%3C!--%20Laurel%20Wreath%20arcs%20--%3E%0A%20%20%20%20%3Cpath%20d%3D%22M335%2C390%20C330%2C440%20370%2C460%20400%2C460%20C430%2C460%20470%2C440%20465%2C390%22%20stroke%3D%22%238b1e1e%22%20stroke-width%3D%222.5%22%20%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22358%22%20r%3D%228%22%20fill%3D%22%238b1e1e%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22580%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2216%22%20fill%3D%22%238b1e1e%22%20letter-spacing%3D%226%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ECHAPTER%20V%20%C3%A2%E2%82%AC%C2%A2%20PRESENT%20DAY%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22630%22%20font-family%3D%22'Cinzel'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2232%22%20fill%3D%22%23e8d5b5%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%20font-weight%3D%22bold%22%3ETHE%20MAN%20HE%20IS%20TODAY%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22670%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2218%22%20fill%3D%22%23c5a059%22%20letter-spacing%3D%222%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3EAge%3A%20Present%3C%2Ftext%3E%0A%0A%20%20%3Crect%20x%3D%22180%22%20y%3D%22730%22%20width%3D%22440%22%20height%3D%2285%22%20rx%3D%226%22%20fill%3D%22%23181310%22%20stroke%3D%22%235a4225%22%20stroke-width%3D%221.5%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22763%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2214%22%20fill%3D%22%23e8d5b5%22%20text-anchor%3D%22middle%22%3EREPLACE%20WITH%20YOUR%20PHOTO%3A%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22790%22%20font-family%3D%22'Courier%20New'%2C%20monospace%22%20font-size%3D%2215%22%20fill%3D%22%23e28743%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3Eassets%2Fphotos%2Ftushar-present.jpg%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22870%22%20font-family%3D%22'Lora'%2C%20'Georgia'%2C%20serif%22%20font-size%3D%2214%22%20fill%3D%22%238d7f71%22%20text-anchor%3D%22middle%22%20font-style%3D%22italic%22%3E%C3%A2%E2%82%AC%C5%93And%20look%20at%20the%20man%20you've%20become...%C3%A2%E2%82%AC%C2%9D%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A';"
+            >
+
+            <figcaption class="finale-photo-badge">
+              <span>â˜… THE MAN OF THE HOUR â˜…</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Grand Finale Title -->
+        <h2 class="birthday-grand-title">
+          <span class="title-top-banner">TO MY FAVORITE ADVENTURER</span>
+          <span class="title-main-reveal">HAPPY BIRTHDAY, MY FAVOURITE HUMAN.</span>
+        </h2>
+
+        <!-- 
+          =============================================================
+          EDITABLE FINAL BIRTHDAY MESSAGE:
+          Customize this message with your personal birthday wishes!
+          =============================================================
+        -->
+        <div class="birthday-message-box">
+          <div class="parchment-border-wrap">
+            <p class="birthday-opening-line">
+              Today is all about celebrating you â€” the journey youâ€™ve walked, the battles youâ€™ve won, and the wonderful soul you are.
+            </p>
+            <p class="birthday-body-text">
+              May this new year bring you everything youâ€™ve been working so hard for: breakthroughs in your passions, peaceful mornings, thrilling adventures, hearty laughter, and the steady knowledge that you are loved beyond words.
+            </p>
+            <p class="birthday-body-text">
+              Hereâ€™s to another trip around the sun, to conquering new horizons, and to making countless more memories together.
+            </p>
+
+            <!-- 
+              =========================================================
+              EDITABLE SIGNATURE LINE:
+              Put your personal closing and name below!
+              =========================================================
+            -->
+            <div class="birthday-signature-block">
+              <span class="signature-pre">Always by your side, with all my love,</span>
+              <span class="signature-name">Hetvi</span>
+              <span class="signature-date">October 23</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Celebration Trigger: Raise a Glass / Embers Burst -->
+        <div class="celebration-trigger-row">
+          <button id="btn-celebrate" class="btn btn-western-gold" type="button">
+            <span class="btn-icon">ðŸ¥‚</span>
+            <span class="btn-text">RAISE A TOAST TO TUSHAR</span>
+            <span class="btn-sparkles" aria-hidden="true">âœ¨</span>
+          </button>
+          <div id="toast-toast-notification" class="toast-popup" aria-live="polite">
+            â˜… A toast to the legend! May your year ahead be legendary. â˜…
+          </div>
+        </div>
+
+        <!-- Closing Cinematic Quote Banner -->
+        <div class="cinematic-closing-banner">
+          <div class="banner-flourish"></div>
+          <p class="closing-quote">â€œYOUR NEXT CHAPTER IS WAITING.â€</p>
+          <div class="banner-flourish"></div>
+        </div>
+
+        <!-- Replay / Back to Top Button -->
+        <div class="replay-journey-wrap">
+          <a href="#scene-opening" class="replay-btn" id="replay-link">
+            &uarr; Ride Back to Trailhead
+          </a>
+        </div>
+
+      </div><!-- /.birthday-card-container -->
+    </section>
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- FOOTER & CUSTOMIZATION HELPER                                     -->
+  <!-- ================================================================= -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-flourish">
+        <span>âš”</span>
+        <span class="footer-divider-line"></span>
+        <span>â˜…</span>
+        <span class="footer-divider-line"></span>
+        <span>âš”</span>
+      </div>
+      <p class="footer-credit">
+        Crafted with love for <strong>Tushar</strong> on his special day.
+      </p>
+      <p class="footer-notes">
+        An original cinematic Western birthday experience.
+      </p>
+
+      <!-- Quick Customizer Drawer Button -->
+      <button id="toggle-customizer-btn" class="footer-guide-btn" type="button" aria-expanded="false" aria-controls="customizer-modal">
+        âš™ Guide: Replace Photos, Music &amp; Text
+      </button>
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- CUSTOMIZATION MODAL DRAWER                                        -->
+  <!-- ================================================================= -->
+  <div id="customizer-modal" class="customizer-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <div class="customizer-card">
+      <div class="customizer-header">
+        <h3 id="guide-title">QUICK CUSTOMIZATION &amp; PUBLISH GUIDE</h3>
+        <button id="close-customizer-btn" class="close-modal-btn" aria-label="Close guide">&times;</button>
+      </div>
+      <div class="customizer-body">
+        <div class="guide-step">
+          <h4>1. Replace the Photos</h4>
+          <p>Drop your favorite 5 photos into <code>assets/photos/</code> with these names:</p>
+          <ul>
+            <li><code>tushar-newborn.jpg</code> (Chapter 1)</li>
+            <li><code>tushar-age-3.jpg</code> (Chapter 2)</li>
+            <li><code>tushar-age-19-20.jpg</code> (Chapter 3)</li>
+            <li><code>tushar-age-23-24.jpg</code> (Chapter 4)</li>
+            <li><code>tushar-present.jpg</code> (Chapter 5 &amp; Finale)</li>
+          </ul>
+        </div>
+
+        <div class="guide-step">
+          <h4>2. Edit Personal Messages &amp; Captions</h4>
+          <p>Open <code>index.html</code> in any text editor (VS Code, Notepad, etc.). Look for the clearly marked comments:</p>
+          <ul>
+            <li><code>&lt;!-- EDITABLE SECTION: CHAPTER X NARRATIVE --&gt;</code></li>
+            <li><code>&lt;!-- EDITABLE APPRECIATION MESSAGE --&gt;</code></li>
+            <li><code>&lt;!-- EDITABLE PERSONAL MESSAGE --&gt;</code></li>
+            <li><code>&lt;!-- EDITABLE FINAL BIRTHDAY MESSAGE --&gt;</code></li>
+          </ul>
+        </div>
+
+        <div class="guide-step">
+          <h4>3. Add Your Background Music</h4>
+          <p>
+            Place your Western instrumental audio file in <code>assets/audio/western-ambience.mp3</code>.
+            If the audio file is not added yet, the websiteâ€™s built-in Web Audio synthesizer automatically plays a soothing acoustic wind &amp; warm tone fallback!
+          </p>
+        </div>
+
+        <div class="guide-step">
+          <h4>4. Publish on GitHub Pages (Free in 2 Minutes)</h4>
+          <ol>
+            <li>Create a new repository on GitHub (e.g. <code>legend-of-tushar</code>).</li>
+            <li>Upload these files (<code>index.html</code>, <code>css/</code>, <code>js/</code>, <code>assets/</code>).</li>
+            <li>Go to repository <strong>Settings</strong> &rarr; <strong>Pages</strong>.</li>
+            <li>Select <strong>Branch: main</strong> &rarr; <strong>Save</strong>.</li>
+            <li>Your cinematic link will be live at: <code>https://&lt;your-username&gt;.github.io/legend-of-tushar/</code>!</li>
+          </ol>
+        </div>
+      </div>
+      <div class="customizer-footer">
+        <button id="close-customizer-btn-bottom" class="btn btn-western-secondary">Close Guide</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Audio Element (Loaded via Relative Path, No Autoplay) -->
+  <audio id="bg-audio" preload="none" loop>
+    <source src="assets/audio/western-ambience.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main JavaScript File -->
+  <script>
+/**
+ * ===================================================================
+ * THE LEGEND OF TUSHAR â€” JAVASCRIPT
+ * A Cinematic Western-Inspired Birthday Experience
+ * Plain Vanilla JavaScript, Zero Dependencies, GitHub Pages Ready
+ * ===================================================================
+ */
+
+(function () {
+  'use strict';
+
+  // -----------------------------------------------------------------
+  // 1. STATE & DOM REFERENCES
+  // -----------------------------------------------------------------
+  const DOM = {
+    audioEl: document.getElementById('bg-audio'),
+    musicBtn: document.getElementById('music-toggle'),
+    audioLabel: document.querySelector('.audio-state-label'),
+    beginBtn: document.getElementById('btn-begin'),
+    skipIntroLink: document.getElementById('skip-intro-link'),
+    celebrateBtn: document.getElementById('btn-celebrate'),
+    toastNotification: document.getElementById('toast-toast-notification'),
+    customizerModal: document.getElementById('customizer-modal'),
+    toggleCustomizerBtn: document.getElementById('toggle-customizer-btn'),
+    closeCustomizerBtn: document.getElementById('close-customizer-btn'),
+    closeCustomizerBtnBottom: document.getElementById('close-customizer-btn-bottom'),
+    navLinks: document.querySelectorAll('.hud-link'),
+    timelineCards: document.querySelectorAll('.timeline-card'),
+    scenes: document.querySelectorAll('.scene'),
+    canvas: document.getElementById('ambient-particles'),
+  };
+
+  const state = {
+    isAudioPlaying: false,
+    usingSynthFallback: false,
+    reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    currentScene: 'scene-opening'
+  };
+
+  // -----------------------------------------------------------------
+  // 2. AUDIO ENGINE & SYNTHESIZER FALLBACK
+  // -----------------------------------------------------------------
+  // If assets/audio/western-ambience.mp3 is not yet present, Web Audio API
+  // synthesizes a gentle, cinematic acoustic atmosphere so the button
+  // always produces lovely Western atmosphere without broken states!
+  let audioCtx = null;
+  let synthGain = null;
+  let synthInterval = null;
+
+  function initWebAudioFallback() {
+    if (audioCtx) return;
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      audioCtx = new AudioContext();
+
+      synthGain = audioCtx.createGain();
+      synthGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      synthGain.connect(audioCtx.destination);
+    } catch (e) {
+      console.warn('Web Audio fallback not supported:', e);
+    }
+  }
+
+  function playSynthChord() {
+    if (!audioCtx || !synthGain) return;
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    // Gentle Western acoustic open-tuning notes (D, A, D, F#)
+    const notes = [146.83, 220.00, 293.66, 369.99];
+    const now = audioCtx.currentTime;
+
+    notes.forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const noteGain = audioCtx.createGain();
+
+      osc.type = i === 0 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(freq, now + i * 0.12);
+
+      noteGain.gain.setValueAtTime(0.001, now + i * 0.12);
+      noteGain.gain.linearRampToValueAtTime(0.045 / notes.length, now + i * 0.12 + 0.8);
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 6.5);
+
+      osc.connect(noteGain);
+      noteGain.connect(synthGain);
+
+      osc.start(now + i * 0.12);
+      osc.stop(now + i * 0.12 + 7.0);
+    });
+  }
+
+  function startSynthAmbience() {
+    initWebAudioFallback();
+    if (!audioCtx) return;
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    state.usingSynthFallback = true;
+    synthGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    synthGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 1.2);
+    playSynthChord();
+    if (synthInterval) clearInterval(synthInterval);
+    synthInterval = setInterval(playSynthChord, 6500);
+  }
+
+  function stopSynthAmbience() {
+    if (synthInterval) {
+      clearInterval(synthInterval);
+      synthInterval = null;
+    }
+    if (audioCtx && synthGain) {
+      synthGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      synthGain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+    }
+    state.usingSynthFallback = false;
+  }
+
+  function updateAudioUI(isPlaying) {
+    state.isAudioPlaying = isPlaying;
+    if (DOM.musicBtn) {
+      DOM.musicBtn.classList.toggle('playing', isPlaying);
+      DOM.musicBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+    }
+    if (DOM.audioLabel) {
+      DOM.audioLabel.textContent = isPlaying ? 'ON' : 'OFF';
+    }
+  }
+
+  async function toggleAudio() {
+    if (state.isAudioPlaying) {
+      // Pause
+      if (DOM.audioEl && !DOM.audioEl.paused) {
+        DOM.audioEl.pause();
+      }
+      stopSynthAmbience();
+      updateAudioUI(false);
+    } else {
+      // Play
+      if (DOM.audioEl) {
+        DOM.audioEl.volume = 0.45;
+        try {
+          await DOM.audioEl.play();
+          updateAudioUI(true);
+          return;
+        } catch (err) {
+          // Local MP3 missing or autoplay blocked: switch to elegant synth fallback
+          console.info('Audio file note: Local MP3 not detected or blocked. Starting ambient synth fallback.');
+          startSynthAmbience();
+          updateAudioUI(true);
+        }
+      } else {
+        startSynthAmbience();
+        updateAudioUI(true);
+      }
+    }
+  }
+
+  // Graceful audio error listener
+  if (DOM.audioEl) {
+    DOM.audioEl.addEventListener('error', function () {
+      console.info('Custom western-ambience.mp3 not found yet; synth atmosphere is ready on demand.');
+    });
+  }
+
+  if (DOM.musicBtn) {
+    DOM.musicBtn.addEventListener('click', toggleAudio);
+  }
+
+  // -----------------------------------------------------------------
+  // 3. BEGIN JOURNEY & SKIP INTRO SMOOTH ACTIONS
+  // -----------------------------------------------------------------
+  if (DOM.beginBtn) {
+    DOM.beginBtn.addEventListener('click', function () {
+      // Gently start audio on first major interaction if not playing
+      if (!state.isAudioPlaying) {
+        toggleAudio();
+      }
+      const target = document.getElementById('scene-timeline');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  if (DOM.skipIntroLink) {
+    DOM.skipIntroLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.getElementById('scene-timeline');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // -----------------------------------------------------------------
+  // 4. TIMELINE SCROLL REVEALS (IntersectionObserver)
+  // -----------------------------------------------------------------
+  function initTimelineObserver() {
+    if (state.reducedMotion) {
+      DOM.timelineCards.forEach(card => card.classList.add('in-view'));
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      DOM.timelineCards.forEach(card => card.classList.add('in-view'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    DOM.timelineCards.forEach(card => observer.observe(card));
+  }
+
+  // -----------------------------------------------------------------
+  // 5. ACTIVE NAV LINK TRACKING (HUD)
+  // -----------------------------------------------------------------
+  function initSceneObserver() {
+    if (!('IntersectionObserver' in window)) return;
+
+    const sceneObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          state.currentScene = id;
+          DOM.navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.35
+    });
+
+    DOM.scenes.forEach(scene => sceneObserver.observe(scene));
+  }
+
+  // -----------------------------------------------------------------
+  // 6. ATMOSPHERIC PARTICLE CANVAS (Dust & Fire Embers)
+  // -----------------------------------------------------------------
+  function initParticleCanvas() {
+    const canvas = DOM.canvas;
+    if (!canvas || state.reducedMotion) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Particle types: dust motes and fire embers
+    const particles = [];
+    const maxParticles = window.innerWidth < 768 ? 32 : 65;
+
+    class Particle {
+      constructor(isBurst = false, originX = width / 2, originY = height / 2) {
+        this.reset(isBurst, originX, originY);
+      }
+
+      reset(isBurst = false, originX = 0, originY = 0) {
+        this.isBurst = isBurst;
+        if (isBurst) {
+          this.x = originX;
+          this.y = originY;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 5 + 2;
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed - 1.5;
+          this.size = Math.random() * 3 + 1.5;
+          this.life = 1;
+          this.decay = Math.random() * 0.025 + 0.015;
+          this.color = Math.random() > 0.4 ? '#ffbe0b' : '#ff5722';
+        } else {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.3) * 0.6;
+          this.vy = -(Math.random() * 0.7 + 0.2);
+          this.size = Math.random() * 2 + 0.8;
+          this.life = Math.random() * 0.7 + 0.3;
+          this.decay = 0.002;
+          // Theme adapts depending on scene
+          const rand = Math.random();
+          if (rand > 0.6) {
+            this.color = '#c5a059'; // Aged gold dust
+          } else if (rand > 0.3) {
+            this.color = '#ff9e42'; // Amber ember
+          } else {
+            this.color = '#ece3d4'; // Pale dust
+          }
+        }
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.isBurst) {
+          this.life -= this.decay;
+          this.vy += 0.08; // gravity
+        } else {
+          // Drift wrap-around
+          if (this.y < -10) this.y = height + 10;
+          if (this.x < -10) this.x = width + 10;
+          if (this.x > width + 10) this.x = -10;
+        }
+      }
+
+      draw() {
+        if (this.life <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.life * (this.isBurst ? 1 : 0.6));
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
+
+    // Function to trigger a celebratory burst
+    window.triggerEmbersBurst = function (x, y) {
+      for (let i = 0; i < 45; i++) {
+        particles.push(new Particle(true, x, y));
+      }
+    };
+
+    let isDocumentVisible = true;
+    document.addEventListener('visibilitychange', () => {
+      isDocumentVisible = !document.hidden;
+    });
+
+    function renderLoop() {
+      if (!isDocumentVisible) {
+        requestAnimationFrame(renderLoop);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+
+        if (p.isBurst && p.life <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    renderLoop();
+  }
+
+  // -----------------------------------------------------------------
+  // 7. CELEBRATION TOAST BUTTON
+  // -----------------------------------------------------------------
+  if (DOM.celebrateBtn) {
+    DOM.celebrateBtn.addEventListener('click', function (e) {
+      const rect = DOM.celebrateBtn.getBoundingClientRect();
+      const clickX = rect.left + rect.width / 2;
+      const clickY = rect.top + rect.height / 2;
+
+      // Burst golden particles
+      if (typeof window.triggerEmbersBurst === 'function') {
+        window.triggerEmbersBurst(clickX, clickY);
+      }
+
+      // Show toast notification
+      if (DOM.toastNotification) {
+        DOM.toastNotification.classList.add('visible');
+        setTimeout(() => {
+          DOM.toastNotification.classList.remove('visible');
+        }, 4000);
+      }
+    });
+  }
+
+  // -----------------------------------------------------------------
+  // 8. CUSTOMIZATION GUIDE MODAL DRAWER
+  // -----------------------------------------------------------------
+  function openCustomizerModal() {
+    if (!DOM.customizerModal) return;
+    DOM.customizerModal.classList.add('open');
+    DOM.customizerModal.setAttribute('aria-hidden', 'false');
+    if (DOM.toggleCustomizerBtn) {
+      DOM.toggleCustomizerBtn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function closeCustomizerModal() {
+    if (!DOM.customizerModal) return;
+    DOM.customizerModal.classList.remove('open');
+    DOM.customizerModal.setAttribute('aria-hidden', 'true');
+    if (DOM.toggleCustomizerBtn) {
+      DOM.toggleCustomizerBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  if (DOM.toggleCustomizerBtn) {
+    DOM.toggleCustomizerBtn.addEventListener('click', openCustomizerModal);
+  }
+
+  if (DOM.closeCustomizerBtn) {
+    DOM.closeCustomizerBtn.addEventListener('click', closeCustomizerModal);
+  }
+
+  if (DOM.closeCustomizerBtnBottom) {
+    DOM.closeCustomizerBtnBottom.addEventListener('click', closeCustomizerModal);
+  }
+
+  if (DOM.customizerModal) {
+    DOM.customizerModal.addEventListener('click', function (e) {
+      if (e.target === DOM.customizerModal) {
+        closeCustomizerModal();
+      }
+    });
+  }
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && DOM.customizerModal && DOM.customizerModal.classList.contains('open')) {
+      closeCustomizerModal();
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // 9. INITIALIZATION
+  // -----------------------------------------------------------------
+  function init() {
+    initTimelineObserver();
+    initSceneObserver();
+    initParticleCanvas();
+
+    // Respect reduced motion media queries dynamically
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    motionQuery.addEventListener('change', (e) => {
+      state.reducedMotion = e.matches;
+      if (e.matches) {
+        DOM.timelineCards.forEach(card => card.classList.add('in-view'));
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+
+</script>
+</body>
+</html>
+
+
