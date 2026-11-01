@@ -3513,53 +3513,6 @@ body {
   }
 
   // -----------------------------------------------------------------
-  // 8. CUSTOMIZATION GUIDE MODAL DRAWER
-  // -----------------------------------------------------------------
-  function openCustomizerModal() {
-    if (!DOM.customizerModal) return;
-    DOM.customizerModal.classList.add('open');
-    DOM.customizerModal.setAttribute('aria-hidden', 'false');
-    if (DOM.toggleCustomizerBtn) {
-      DOM.toggleCustomizerBtn.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  function closeCustomizerModal() {
-    if (!DOM.customizerModal) return;
-    DOM.customizerModal.classList.remove('open');
-    DOM.customizerModal.setAttribute('aria-hidden', 'true');
-    if (DOM.toggleCustomizerBtn) {
-      DOM.toggleCustomizerBtn.setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  if (DOM.toggleCustomizerBtn) {
-    DOM.toggleCustomizerBtn.addEventListener('click', openCustomizerModal);
-  }
-
-  if (DOM.closeCustomizerBtn) {
-    DOM.closeCustomizerBtn.addEventListener('click', closeCustomizerModal);
-  }
-
-  if (DOM.closeCustomizerBtnBottom) {
-    DOM.closeCustomizerBtnBottom.addEventListener('click', closeCustomizerModal);
-  }
-
-  if (DOM.customizerModal) {
-    DOM.customizerModal.addEventListener('click', function (e) {
-      if (e.target === DOM.customizerModal) {
-        closeCustomizerModal();
-      }
-    });
-  }
-
-  window.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && DOM.customizerModal && DOM.customizerModal.classList.contains('open')) {
-      closeCustomizerModal();
-    }
-  });
-
-  // -----------------------------------------------------------------
   // 9. INITIALIZATION
   // -----------------------------------------------------------------
     // Dynamic image fallback: tries .jpeg, .jpg, assets/photos/
